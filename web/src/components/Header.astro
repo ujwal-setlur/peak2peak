@@ -1,0 +1,33 @@
+---
+import { SITE_TITLE } from "../config/constants";
+---
+
+<header
+  class="bg-white shadow-md p-4"
+  style={{
+    background: "#00000090",
+    blendMode: "blur",
+    position: "fixed",
+    top: 0,
+    width: "100%",
+    padding: "0px 100px",
+    display: "flex",
+  }}
+>
+  <nav
+    class="flex items-center justify-between"
+    style={{
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "space-between",
+    }}
+  >
+    <h2 class="m-0 text-base">
+      <a
+        href="/"
+        class="no-underline"
+        style={{ color: "white", textDecoration: "none" }}>{SITE_TITLE}</a
+      >
+    </h2>
+  </nav>
+</header>
