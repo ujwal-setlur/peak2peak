@@ -11,20 +11,13 @@
     "draftAndPublish": true
   },
   "attributes": {
-    "NavBar": {
-      "type": "component",
-      "repeatable": false,
-      "component": "navbar.navbar"
-    },
     "Image": {
       "type": "media",
       "multiple": false,
       "required": false,
       "allowedTypes": [
         "images",
-        "files",
-        "videos",
-        "audios"
+        "files"
       ]
     },
     "HeroSection": {
@@ -32,6 +25,11 @@
       "components": [
         "blocks.hero-section"
       ]
+    },
+    "categories": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::category.category"
     }
   }
 }

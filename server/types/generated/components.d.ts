@@ -39,18 +39,15 @@ export interface ElementsLogo extends Struct.ComponentSchema {
   };
 }
 
-export interface NavbarNavbar extends Struct.ComponentSchema {
-  collectionName: 'components_navbar_navbars';
+export interface LayoutHeader extends Struct.ComponentSchema {
+  collectionName: 'components_layout_headers';
   info: {
     description: '';
-    displayName: 'Navbar';
+    displayName: 'Header';
   };
   attributes: {
-    AboutUs: Schema.Attribute.Component<'elements.link', false>;
-    Contact: Schema.Attribute.Component<'elements.link', false>;
-    Heading: Schema.Attribute.String;
-    Home: Schema.Attribute.Component<'elements.link', false>;
-    socialLinks: Schema.Attribute.Component<'social.social-links', true>;
+    logo: Schema.Attribute.Media<'images'>;
+    social: Schema.Attribute.Component<'social.social-links', true>;
   };
 }
 
@@ -86,7 +83,7 @@ declare module '@strapi/strapi' {
       'blocks.hero-section': BlocksHeroSection;
       'elements.link': ElementsLink;
       'elements.logo': ElementsLogo;
-      'navbar.navbar': NavbarNavbar;
+      'layout.header': LayoutHeader;
       'profile-info.profile': ProfileInfoProfile;
       'social.social-links': SocialSocialLinks;
     }
