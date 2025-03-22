@@ -396,6 +396,7 @@ export interface ApiCategoryContentCategoryContent
     > &
       Schema.Attribute.Private;
     publishedAt: Schema.Attribute.DateTime;
+    text: Schema.Attribute.String & Schema.Attribute.Required;
     Thumbnail: Schema.Attribute.Media<'images'>;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
@@ -409,7 +410,7 @@ export interface ApiCategoryCategory extends Struct.CollectionTypeSchema {
   collectionName: 'categories';
   info: {
     description: '';
-    displayName: 'Category';
+    displayName: 'Blogs ';
     pluralName: 'categories';
     singularName: 'category';
   };
@@ -487,7 +488,7 @@ export interface ApiHomePageHomePage extends Struct.SingleTypeSchema {
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
     HeroSection: Schema.Attribute.DynamicZone<['blocks.hero-section']>;
-    Image: Schema.Attribute.Media<'images' | 'files'>;
+    Image: Schema.Attribute.Media<'images' | 'videos'>;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
