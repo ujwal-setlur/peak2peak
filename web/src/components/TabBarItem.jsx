@@ -10,7 +10,7 @@ const TabBarItem = ({ tab, isActive = false, onClick = () => {} }) => {
           e.preventDefault();
           onClick(tab.id);
         }}
-        class={`group relative flex min-w-fit flex-col items-center gap-[30px]`}
+        class={`group relative flex min-w-fit shrink-0 flex-col items-center gap-[30px]`}
       >
         <div className="flex w-full items-start">
           <div

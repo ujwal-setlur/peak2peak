@@ -1,0 +1,127 @@
+---
+import LikeIcon from '../assets/like.svg';
+
+const { postId, data } = Astro.props;
+---
+
+<!-- Modal Container -->
+<div
+  class="invisible fixed inset-0 z-50 flex items-center justify-center opacity-0 transition-opacity duration-300"
+  id={`modal-${postId}`}
+>
+  <!-- Background Overlay -->
+  <div class="absolute inset-0 bg-black opacity-50" data-post-id={postId}></div>
+
+  <!-- Modal Content -->
+  <div
+    class="relative z-10 w-full max-w-[960px] overflow-hidden rounded-[10px] bg-white shadow-lg dark:bg-gray-800"
+  >
+    <!-- Close Button -->
+    <button
+      class="absolute right-3 top-3 text-gray-400 hover:text-gray-900 dark:hover:text-white"
+      data-modal-close
+      data-post-id={postId}
+    >
+      <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M6 18L18 6M6 6l12 12"></path>
+      </svg>
+    </button>
+
+    <!-- Modal Body -->
+    <div class="flex h-full w-full gap-2">
+      <div class="flex max-w-[500px] flex-col">
+        <div class="flex aspect-square">
+          <img src={data.image.url} alt="post" class="cover aspect-square w-full overflow-hidden" />
+        </div>
+        <div class="flex w-full flex-col gap-3 bg-white bg-opacity-5 px-5 pb-5 pt-5">
+          <!-- Likes Section -->
+          <div class="flex items-center gap-8">
+            <div class="flex items-center gap-4">
+              <button
+                class="text-teal-600 hover:text-teal-800"
+                data-action="like"
+                data-post-id={postId}
+              >
+                <img src={LikeIcon.src} alt="like" class="h-6 w-6" />
+              </button>
+              <span
+                class="text-base font-medium text-gray-900 dark:text-white"
+                id={`likes-${postId}`}
+              >
+                {`${data?.likesCount || 0} likes`}
+              </span>
+            </div>
+          </div>
+
+          <div class="w-full text-sm text-white">
+            {data?.title || ''}
+          </div>
+        </div>
+      </div>
+
+      <div class="w-full space-y-4 py-4 pl-4 pr-6">
+        <!-- Comments Section -->
+        <div class="w-full space-y-4">
+          <h3 class="text-base font-semibold text-gray-900 dark:text-white">
+            {`${data?.commentsCount || 0} comments`}
+          </h3>
+          <ul class="max-h-[500px] space-y-3 overflow-y-auto" id={`comments-${postId}`}>
+            {
+              data?.comments?.length
+                ? data?.comments.map((comment) => (
+                    <li class="flex flex-col text-gray-700 dark:text-gray-300">
+                      <span class="text-xs font-light">{comment.user}</span>
+                      <span class="text-xs">{comment.text}</span>
+                    </li>
+                  ))
+                : null
+            }
+          </ul>
+          <form class="flex flex-col gap-3" data-comment-form data-post-id={postId}>
+            <div class="text-sm font-medium text-white">Add comment</div>
+            <div class="flex flex-col gap-2">
+              <input
+                type="text"
+                name="name"
+                placeholder="Your name"
+                class="w-full rounded-lg border px-3 py-2 focus:outline-none focus:ring-2 focus:ring-teal-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white"
+              />
+              <input
+                type="text"
+                name="comment"
+                placeholder="Add a comment..."
+                class="w-full rounded-lg border px-3 py-2 focus:outline-none focus:ring-2 focus:ring-teal-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white"
+              />
+            </div>
+            <button
+              type="button"
+              class="self-end rounded-lg bg-teal-600 px-4 py-2 text-xs text-white hover:bg-teal-700"
+            >
+              Add comment
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Client-Side Script -->
+<script is:inline>
+  // Handle modal close
+  document.addEventListener('click', (e) => {
+    const closeElement = e.target.closest('[data-modal-close]');
+    if (closeElement) {
+      const postId = closeElement.dataset.postId;
+      const modal = document.getElementById(`modal-${postId}`);
+      if (modal) {
+        modal.classList.remove('opacity-100', 'visible');
+        modal.classList.add('opacity-0', 'invisible');
+      }
+    }
+  });
+</script>

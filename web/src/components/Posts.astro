@@ -6,23 +6,24 @@ import TabBarItem from './TabBarItem';
 import PostCard from './PostCard';
 
 import PostsData from './posts.json';
+import PostModal from './PostModal.astro';
 ---
 
 <section class="flex w-full flex-col overflow-auto">
-  <div class="z-10 flex w-full flex-col items-center justify-center bg-white/70 backdrop-blur-sm">
+  <div
+    class="z-10 flex w-full flex-col items-center justify-center bg-white/70 px-5 backdrop-blur-sm"
+  >
     <div class="flex w-full max-w-screen-2xl flex-col gap-5">
-      <!-- TabBar section begin -->
+      <!-- TabBar section -->
       <TabBar client:load initialActiveTab="past-trips" />
-      <!-- TabBar section end -->
 
-      <!-- Posts section begin -->
-      <div class="grid grid-cols-3 gap-10 py-10">
-        {PostsData.map((post) => <PostCard client:load data={post} />)}
+      <!-- Posts section -->
+      <div class="grid grid-cols-2 gap-5 py-10 md:grid-cols-3 md:gap-10">
+        {PostsData.map((post) => <PostCard client:load data={post} onClick={() => {}} />)}
       </div>
-      <!-- Posts section end -->
     </div>
 
-    <!-- Load more section begin -->
+    <!-- Load more section -->
     <div class="flex items-center justify-center pb-12">
       <TabBarItem
         client:load
@@ -34,6 +35,25 @@ import PostsData from './posts.json';
         }}
       />
     </div>
-    <!-- Load more section end -->
   </div>
 </section>
+
+<!-- Modal Instances (one per post) -->
+{PostsData.map((post) => <PostModal client:load postId={post.id} data={post} />)}
+
+<!-- Client-Side Script to Open Modal -->
+<script is:inline>
+  document.addEventListener('click', (e) => {
+    const postCard = e.target.closest('.post-card');
+    if (postCard) {
+      const postId = postCard.dataset.postId;
+      if (postId) {
+        const modal = document.getElementById(`modal-${postId}`);
+        if (modal) {
+          modal.classList.remove('opacity-0', 'invisible');
+          modal.classList.add('opacity-100', 'visible');
+        }
+      }
+    }
+  });
+</script>

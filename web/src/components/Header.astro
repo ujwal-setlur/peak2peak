@@ -10,13 +10,13 @@ import facebookLogo from '../assets/facebook.svg';
 ---
 
 <header
-  class="fixed top-0 z-50 flex h-full max-h-[80px] w-full justify-center bg-black/50 backdrop-blur-md"
+  class="fixed top-0 z-50 flex h-full max-h-[80px] w-full justify-center bg-black/50 px-5 backdrop-blur-md"
 >
   <nav class="flex h-full w-full max-w-screen-2xl items-center justify-between">
     <img src={logo.src} alt="PEAK2PEAK" />
     <div class="flex items-center gap-5">
       <!-- Nav links section begin -->
-      <div class="flex items-center gap-10">
+      <div class="hidden items-center gap-5 md:flex lg:gap-6 xl:gap-10">
         <HeaderLink
           href="/"
           icon={`<svg id="Group_69" data-name="Group 69" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="21.033" height="21.16" viewBox="0 0 21.033 21.16">
@@ -92,10 +92,10 @@ import facebookLogo from '../assets/facebook.svg';
       </div>
       <!-- Nav links section end -->
 
-      <span class="text-lg font-thin text-white"> &#124; </span>
+      <span class="hidden text-lg font-thin text-white text-opacity-50 lg:block"> &#124; </span>
 
       <!-- Social links section begin -->
-      <div class="flex items-center gap-5">
+      <div class="hidden items-center gap-5 lg:flex">
         <img class="h-8 w-8 hover:cursor-pointer" src={instagramLogo.src} alt="instagram" />
         <img class="h-8 w-8 hover:cursor-pointer" src={facebookLogo.src} alt="facebook" />
         <img class="h-8 w-8 hover:cursor-pointer" src={twitterLogo.src} alt="twitter" />
