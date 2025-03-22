@@ -1,3 +1,38 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  /* Override default Tailwind styles */
+  h1 {
+    @apply text-2xl font-bold leading-tight; /* Customize size for h1 */
+  }
+
+  h2 {
+    @apply text-2xl font-semibold leading-tight; /* Customize size for h2 */
+  }
+
+  h3 {
+    @apply text-xl font-bold leading-tight; /* Customize size for h3 */
+  }
+
+  h4 {
+    @apply text-xl font-semibold leading-tight; /* Customize size for h4 */
+  }
+
+  h5 {
+    @apply text-lg font-medium leading-tight; /* Customize size for h5 */
+  }
+
+  h6 {
+    @apply text-md font-medium leading-tight; /* Customize size for h6 */
+  }
+
+  span {
+    @apply text-base font-normal; /* Customize size for span */
+  }
+
+  p {
+    @apply mb-1 text-base font-thin;
+  }
+}

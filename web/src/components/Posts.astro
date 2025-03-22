@@ -1,0 +1,39 @@
+---
+import PastIcon from '../assets/past.svg';
+
+import TabBar from './TabBar.jsx';
+import TabBarItem from './TabBarItem';
+import PostCard from './PostCard';
+
+import PostsData from './posts.json';
+---
+
+<section class="flex w-full flex-col overflow-auto">
+  <div class="z-10 flex w-full flex-col items-center justify-center bg-white/70 backdrop-blur-sm">
+    <div class="flex w-full max-w-screen-2xl flex-col gap-5">
+      <!-- TabBar section begin -->
+      <TabBar client:load initialActiveTab="past-trips" />
+      <!-- TabBar section end -->
+
+      <!-- Posts section begin -->
+      <div class="grid grid-cols-3 gap-10 py-10">
+        {PostsData.map((post) => <PostCard client:load data={post} />)}
+      </div>
+      <!-- Posts section end -->
+    </div>
+
+    <!-- Load more section begin -->
+    <div class="flex items-center justify-center pb-12">
+      <TabBarItem
+        client:load
+        tab={{
+          id: 'past-trips',
+          label: 'LOAD MORE',
+          href: '',
+          icon: PastIcon,
+        }}
+      />
+    </div>
+    <!-- Load more section end -->
+  </div>
+</section>
