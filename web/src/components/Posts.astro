@@ -43,6 +43,8 @@ import PostModal from './PostModal.astro';
 
 <!-- Client-Side Script to Open Modal -->
 <script is:inline>
+  let scrollY = 0;
+
   document.addEventListener('click', (e) => {
     const postCard = e.target.closest('.post-card');
     if (postCard) {
@@ -50,8 +52,19 @@ import PostModal from './PostModal.astro';
       if (postId) {
         const modal = document.getElementById(`modal-${postId}`);
         if (modal) {
+          // Save current scroll position
+          scrollY = window.scrollY;
+
+          // Prevent background scroll without losing position
+          document.body.style.position = 'fixed';
+          document.body.style.top = `-${scrollY}px`;
+          document.body.style.width = '100%';
+
           modal.classList.remove('opacity-0', 'invisible');
           modal.classList.add('opacity-100', 'visible');
+
+          // Prevent background scrolling without flickering
+          document.body.classList.add('modal-open');
         }
       }
     }

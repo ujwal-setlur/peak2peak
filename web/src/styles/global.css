@@ -36,3 +36,10 @@
     @apply mb-1 text-base font-thin;
   }
 }
+
+body.modal-open {
+  position: fixed;
+  width: 100%;
+  overflow-y: scroll; /* Keeps scrollbar space reserved */
+  padding-right: var(--scrollbar-width, 0px); /* Adjusts for scrollbar width */
+}
