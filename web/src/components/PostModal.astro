@@ -2,16 +2,9 @@
 import LikeIcon from '../assets/like-primary.svg';
 import CommentIcon from '../assets/comment-primary.svg';
 
-const { postId, data } = Astro.props;
+import { getInitials } from '../utils';
 
-const getInitials = (name: string) => {
-  if (!name) return '';
-  const words = name.trim().split(/\s+/);
-  return words
-    .slice(0, 2)
-    .map((word) => word[0].toUpperCase())
-    .join('');
-};
+const { postId, data } = Astro.props;
 ---
 
 <!-- Modal Container -->
@@ -139,7 +132,7 @@ const getInitials = (name: string) => {
             <ul class="mt-8 max-h-[500px] space-y-3 overflow-y-auto" id={`comments-${postId}`}>
               {
                 data?.comments?.length
-                  ? data?.comments.map((comment, index) => {
+                  ? data?.comments.map((comment: any, index: number) => {
                       const isLastComment = index === data.comments.length - 1;
                       return (
                         <li class={`flex gap-3 ${!isLastComment ? 'border-b-[1px] pb-3' : ''}`}>
