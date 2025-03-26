@@ -8,7 +8,7 @@ type Props = HTMLAttributes<'a'> & {
 const { href, class: className, icon, ...props } = Astro.props;
 // const pathname = Astro.url.pathname.replace(import.meta.env.BASE_URL, '');
 const pathname = '';
-const subpath = pathname.match(/[^\/]+/g);
+const subpath = pathname.match(/[^\/]+/g); // eslint-disable-line no-useless-escape
 const isActive = href === pathname || href === '/' + (subpath?.[0] || '');
 ---
 

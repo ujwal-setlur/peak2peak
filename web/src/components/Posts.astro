@@ -39,7 +39,7 @@ import PostModal from './PostModal.astro';
 </section>
 
 <!-- Modal Instances (one per post) -->
-{PostsData.map((post) => <PostModal client:load postId={post.id} data={post} />)}
+{PostsData.map((post) => <PostModal postId={post.id} data={post} />)}
 
 <!-- Client-Side Script to Open Modal -->
 <script is:inline>

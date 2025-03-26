@@ -12,6 +12,7 @@ export default {
       },
       fontFamily: {
         sans: ['Poppins', 'sans-serif'],
+        playFair: ['Playfair Display', 'sans-serif'],
       },
       fontSize: {
         xs: '0.8rem',
