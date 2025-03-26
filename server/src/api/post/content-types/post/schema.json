@@ -1,25 +1,20 @@
 {
   "kind": "collectionType",
-  "collectionName": "category_contents",
+  "collectionName": "posts",
   "info": {
-    "singularName": "category-content",
-    "pluralName": "category-contents",
-    "displayName": "Blog",
+    "singularName": "post",
+    "pluralName": "posts",
+    "displayName": "Post",
     "description": ""
   },
   "options": {
     "draftAndPublish": true
   },
   "attributes": {
-    "Category": {
-      "type": "relation",
-      "relation": "oneToOne",
-      "target": "api::category.category"
+    "title": {
+      "type": "string"
     },
-    "Description": {
-      "type": "text"
-    },
-    "Images": {
+    "images": {
       "type": "media",
       "multiple": true,
       "required": false,
@@ -27,32 +22,38 @@
         "images"
       ]
     },
-    "Video": {
+    "video": {
       "type": "media",
       "multiple": true,
       "required": false,
       "allowedTypes": [
-        "videos",
-        "files"
+        "videos"
       ]
     },
-    "Videolink": {
+    "blog": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::category.category"
+    },
+    "likes": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::like.like",
+      "mappedBy": "post"
+    },
+    "externalLink": {
       "type": "string"
     },
-    "ExternalLink": {
+    "shortDescription": {
       "type": "string"
     },
-    "Thumbnail": {
+    "thumbNail": {
       "type": "media",
       "multiple": false,
       "required": false,
       "allowedTypes": [
         "images"
       ]
-    },
-    "text": {
-      "type": "string",
-      "required": true
     }
   }
 }

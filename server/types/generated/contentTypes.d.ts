@@ -369,43 +369,6 @@ export interface AdminUser extends Struct.CollectionTypeSchema {
   };
 }
 
-export interface ApiCategoryContentCategoryContent
-  extends Struct.CollectionTypeSchema {
-  collectionName: 'category_contents';
-  info: {
-    description: '';
-    displayName: 'Blog';
-    pluralName: 'category-contents';
-    singularName: 'category-content';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    Category: Schema.Attribute.Relation<'oneToOne', 'api::category.category'>;
-    createdAt: Schema.Attribute.DateTime;
-    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    Description: Schema.Attribute.Text;
-    ExternalLink: Schema.Attribute.String;
-    Images: Schema.Attribute.Media<'images', true>;
-    locale: Schema.Attribute.String & Schema.Attribute.Private;
-    localizations: Schema.Attribute.Relation<
-      'oneToMany',
-      'api::category-content.category-content'
-    > &
-      Schema.Attribute.Private;
-    publishedAt: Schema.Attribute.DateTime;
-    text: Schema.Attribute.String & Schema.Attribute.Required;
-    Thumbnail: Schema.Attribute.Media<'images'>;
-    updatedAt: Schema.Attribute.DateTime;
-    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    Video: Schema.Attribute.Media<'videos' | 'files', true>;
-    Videolink: Schema.Attribute.String;
-  };
-}
-
 export interface ApiCategoryCategory extends Struct.CollectionTypeSchema {
   collectionName: 'categories';
   info: {
@@ -480,10 +443,7 @@ export interface ApiHomePageHomePage extends Struct.SingleTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
-    categories: Schema.Attribute.Relation<
-      'oneToMany',
-      'api::category.category'
-    >;
+    blogs: Schema.Attribute.Relation<'oneToMany', 'api::category.category'>;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -499,6 +459,66 @@ export interface ApiHomePageHomePage extends Struct.SingleTypeSchema {
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+  };
+}
+
+export interface ApiLikeLike extends Struct.CollectionTypeSchema {
+  collectionName: 'likes';
+  info: {
+    description: '';
+    displayName: 'Like';
+    pluralName: 'likes';
+    singularName: 'like';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<'oneToMany', 'api::like.like'> &
+      Schema.Attribute.Private;
+    post: Schema.Attribute.Relation<'manyToOne', 'api::post.post'>;
+    publishedAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    visitorId: Schema.Attribute.String;
+  };
+}
+
+export interface ApiPostPost extends Struct.CollectionTypeSchema {
+  collectionName: 'posts';
+  info: {
+    description: '';
+    displayName: 'Post';
+    pluralName: 'posts';
+    singularName: 'post';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    blog: Schema.Attribute.Relation<'oneToOne', 'api::category.category'>;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    externalLink: Schema.Attribute.String;
+    images: Schema.Attribute.Media<'images', true>;
+    likes: Schema.Attribute.Relation<'oneToMany', 'api::like.like'>;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<'oneToMany', 'api::post.post'> &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    shortDescription: Schema.Attribute.String;
+    thumbNail: Schema.Attribute.Media<'images'>;
+    title: Schema.Attribute.String;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    video: Schema.Attribute.Media<'videos', true>;
   };
 }
 
@@ -1011,10 +1031,11 @@ declare module '@strapi/strapi' {
       'admin::transfer-token': AdminTransferToken;
       'admin::transfer-token-permission': AdminTransferTokenPermission;
       'admin::user': AdminUser;
-      'api::category-content.category-content': ApiCategoryContentCategoryContent;
       'api::category.category': ApiCategoryCategory;
       'api::global.global': ApiGlobalGlobal;
       'api::home-page.home-page': ApiHomePageHomePage;
+      'api::like.like': ApiLikeLike;
+      'api::post.post': ApiPostPost;
       'plugin::content-releases.release': PluginContentReleasesRelease;
       'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;
       'plugin::i18n.locale': PluginI18NLocale;
