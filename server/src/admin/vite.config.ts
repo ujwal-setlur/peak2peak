@@ -8,8 +8,8 @@ export default (config: UserConfig) => {
       },
     },
     server: {
-      allowedHosts: ['loaclhost',
-    '1337--main--dethen-workspace--dethen-evolvier.workspace.evolvier.com',
+      allowedHosts: ['localhost',
+    '',
 ],
 },
   });

@@ -15,6 +15,13 @@
     "isExternal": {
       "type": "boolean",
       "default": false
+    },
+    "icon": {
+      "allowedTypes": [
+        "images"
+      ],
+      "type": "media",
+      "multiple": false
     }
   }
 }

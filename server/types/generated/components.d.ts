@@ -85,6 +85,7 @@ export interface SocialSocialLinks extends Struct.ComponentSchema {
     displayName: 'Social Links';
   };
   attributes: {
+    icon: Schema.Attribute.Media<'images'>;
     isExternal: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
     text: Schema.Attribute.String;
     url: Schema.Attribute.String;
