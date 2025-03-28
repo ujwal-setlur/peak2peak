@@ -1,48 +1,57 @@
-# Astro Starter Kit: Basics
+# 🚀 Peak2Peak
 
-```sh
-yarn create astro@latest -- --template basics
+Peak2Peak is a modern Astro project using React, TypeScript, and Tailwind CSS. It includes a robust ESLint and Prettier setup to ensure high-quality code formatting and linting.
+
+## Project Setup
+
+### Requirements
+
+Node.js >=18
+
+Package Manager: npm or yarn
+
+### Installation
+
+Clone the repository and install dependencies:
+
+```bash
+git clone https://github.com/yourusername/peak2peak.git
+cd peak2peak/web
+
+# using npm
+npm install
+
+#OR using yarn
+yarn install
 ```
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/basics)
-[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/astro/tree/latest/examples/basics)
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/withastro/astro?devcontainer_path=.devcontainer/basics/devcontainer.json)
+### Scripts
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+Run the following commands based on your needs, from a terminal:
 
-![just-the-basics](https://github.com/withastro/astro/assets/2244813/a0a5533c-a856-4198-8470-2d67b1d7c554)
+| Command        | Action                                      |
+| :------------- | :------------------------------------------ |
+| `yarn install` | Installs dependencies                       |
+| `yarn dev`     | Starts local dev server at `localhost:4321` |
+| `yarn build`   | Build your production site to `./dist/`     |
 
-## 🚀 Project Structure
+### Linting & Formatting
 
-Inside of your Astro project, you'll see the following folders and files:
+This project follows best practices using ESLint and Prettier.
+To manually lint and format the code:
 
-```text
-/
-├── public/
-│   └── favicon.svg
-├── src/
-│   ├── layouts/
-│   │   └── Layout.astro
-│   └── pages/
-│       └── index.astro
-└── package.json
+```bash
+# using npm
+npm run lint
+
+# OR using yarn
+yarn lint
 ```
 
-To learn more about the folder structure of an Astro project, refer to [our guide on project structure](https://docs.astro.build/en/basics/project-structure/).
+```bash
+# using npm
+npm run format
 
-## 🧞 Commands
-
-All commands are run from the root of the project, from a terminal:
-
-| Command                | Action                                           |
-| :--------------------- | :----------------------------------------------- |
-| `yarn install`         | Installs dependencies                            |
-| `yarn dev`             | Starts local dev server at `localhost:4321`      |
-| `yarn build`           | Build your production site to `./dist/`          |
-| `yarn preview`         | Preview your build locally, before deploying     |
-| `yarn astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `yarn astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+# OR using yarn
+yarn format
+```
