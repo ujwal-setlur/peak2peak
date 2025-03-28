@@ -1,21 +1,24 @@
 ---
+import { SocialLink } from '../types/common';
 import HeaderLink from './HeaderLink.astro';
 
-import logo from '../assets/logo.svg';
-import pinterestLogo from '../assets/pinterest.svg';
-import instagramLogo from '../assets/instagram.svg';
-import dribbbleLogo from '../assets/dribbble.svg';
-import twitterLogo from '../assets/twitter.svg';
-import facebookLogo from '../assets/facebook.svg';
+export interface Props {
+  logoSrc: string;
+  socialData: SocialLink[];
+}
+
+const { logoSrc, socialData } = Astro.props;
 ---
 
 <header
   class="fixed top-0 z-50 flex h-full max-h-[70px] w-full justify-center bg-black/50 px-5 backdrop-blur-md sm:max-h-[80px]"
 >
   <nav class="flex h-full w-full max-w-screen-2xl items-center justify-between">
-    <img src={logo.src} alt="PEAK2PEAK" class="h-[22px] sm:h-[28px]" />
+    <a href="/" target="_self">
+      <img src={logoSrc || ''} alt="PEAK2PEAK" class="h-[22px] sm:h-[28px]" />
+    </a>
     <div class="flex items-center gap-5">
-      <!-- Nav links section begin -->
+      <!-- Nav links section -->
       <div class="hidden items-center gap-5 md:flex lg:gap-6 xl:gap-10">
         <HeaderLink
           href="/"
@@ -90,19 +93,21 @@ import facebookLogo from '../assets/facebook.svg';
           CONTACT
         </HeaderLink>
       </div>
-      <!-- Nav links section end -->
 
       <span class="hidden text-lg font-thin text-white text-opacity-50 lg:block"> &#124; </span>
 
-      <!-- Social links section begin -->
+      <!-- Social links section -->
       <div class="hidden items-center gap-5 lg:flex">
-        <img class="h-8 w-8 hover:cursor-pointer" src={instagramLogo.src} alt="instagram" />
-        <img class="h-8 w-8 hover:cursor-pointer" src={facebookLogo.src} alt="facebook" />
-        <img class="h-8 w-8 hover:cursor-pointer" src={twitterLogo.src} alt="twitter" />
-        <img class="h-8 w-8 hover:cursor-pointer" src={pinterestLogo.src} alt="pinterest" />
-        <img class="h-8 w-8 hover:cursor-pointer" src={dribbbleLogo.src} alt="dribbble" />
+        {
+          socialData.map(({ name, url, icon }) => {
+            return (
+              <a href={url || ''} target="_blank" rel="noopener noreferrer" class="h-8 w-8">
+                <img src={icon?.url || ''} alt={name} class="h-full w-full" />
+              </a>
+            );
+          }) || null
+        }
       </div>
-      <!-- Social links section end -->
     </div>
   </nav>
 </header>
