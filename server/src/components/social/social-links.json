@@ -1,7 +1,8 @@
 {
   "collectionName": "components_social_social_links",
   "info": {
-    "displayName": "Social Links"
+    "displayName": "Social Links",
+    "description": ""
   },
   "options": {},
   "attributes": {
