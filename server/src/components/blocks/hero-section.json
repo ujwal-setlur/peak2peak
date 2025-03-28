@@ -11,9 +11,6 @@
       "repeatable": false,
       "component": "elements.logo"
     },
-    "heading": {
-      "type": "string"
-    },
     "title": {
       "type": "text"
     },
@@ -27,6 +24,9 @@
     },
     "longDescription": {
       "type": "richtext"
+    },
+    "heading": {
+      "type": "blocks"
     }
   }
 }

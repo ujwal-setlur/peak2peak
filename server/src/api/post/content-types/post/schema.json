@@ -44,9 +44,6 @@
     "externalLink": {
       "type": "string"
     },
-    "shortDescription": {
-      "type": "string"
-    },
     "thumbNail": {
       "type": "media",
       "multiple": false,
@@ -60,6 +57,9 @@
       "relation": "oneToMany",
       "target": "api::comment.comment",
       "mappedBy": "post"
+    },
+    "description": {
+      "type": "richtext"
     }
   }
 }
