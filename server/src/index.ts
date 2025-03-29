@@ -1,4 +1,5 @@
 import { Core } from '@strapi/strapi';
+import post from './api/post/controllers/post';
 
 export default {
   /**
@@ -18,13 +19,77 @@ export default {
         likeCount: Int!
         like: LikeEntityResponse
       }
+
+      type CommentResponse {
+        id: ID!
+        email: String!
+        name: String!
+        comment: String!
+        createdAt: DateTime!
+        post: PostEntityResponse
+      }
+
+      extend type Post {
+        likeCounts: Int!
+        commentCount: Int!
+      }
       
       type Mutation {
         toggleLike(blog: ID!, visitorId: String!): ToggleLikeResponse
       }
+
+      type Mutation {
+        addComment(blog: ID!, email: String!, name: String!, comment: String!): CommentResponse
+      }
     `,
     resolvers: {
+      Post: {
+        likeCounts: async (parent, args, context) => {
+          return await getLikeCount(parent.documentId, strapi);
+        },
+        commentCount: async(parent,args,context) => {
+          return await getCommentCount(parent.documentId, strapi)
+        }
+      },
       Mutation: {
+        //for add comment
+        addComment: {
+          resolve: async (parent,args,context) => {
+            const {blog,email,name,comment} = args;
+            
+            if (!blog || !email || !name || !comment) {
+              throw new Error("Missing required fields");
+            }
+
+            try {
+              const post = await strapi.db.query("api::post.post").findMany({
+                where: {
+                  documentId: blog
+                }
+              });
+
+              if (!post || post.length === 0) {
+                throw new Error("Post not found");
+              }
+
+              const postId = post[0].id;
+
+              const newComment = await strapi.entityService.create("api::comment.comment", {
+                data: {
+                  email,
+                  name,
+                  comment,
+                  post: postId,
+                }
+              });
+              return newComment;
+            } catch (error) {
+              throw new Error('Error adding comment: ${error.message');
+            }
+          }
+        },
+
+        //for unlike and like a ppost
         toggleLike: {
           resolve: async (parent, args, context) => {
             const { blog, visitorId } = args;
@@ -34,14 +99,12 @@ export default {
             }
 
             try {
-              // const post = await strapi.documents("api::post.post").findMany();
               const post = await strapi.db.query('api::post.post').findMany({
                 where: {
                   documentId: blog
                 },
                 populate: {likes: true}
               });
-              console.log("post", post.map((like)=> like.likes));
 
               if (!post || post.length === 0) {
                 throw new Error("Post not found");
@@ -49,7 +112,6 @@ export default {
 
               const postId = post[0].id;
               const like = post[0].likes;
-              console.log("like", like)
 
 
               const existingLike = like.find((like) => like.visitorId === visitorId);
@@ -57,7 +119,7 @@ export default {
               if (existingLike) {
                 await strapi.entityService.delete('api::like.like', existingLike.id);
                 return {
-                  action: 'unliked',
+                  action: 'UNLIKED',
                   likeCount: await getLikeCount(blog, strapi),
                 };
               } else {
@@ -70,7 +132,7 @@ export default {
                   }
                 });
                 return {
-                  action: 'liked',
+                  action: 'LIKED',
                   likeCount: await getLikeCount(blog, strapi),
                   like: newLike,
                 };
@@ -81,20 +143,37 @@ export default {
           }
         }
       }
+
     },
     resolversConfig: {
       'Mutation.toggleLike': {
-        auth: false // Make this endpoint public
+        auth: false 
+      },
+      'Mutation.addComment': {
+        auth: false
       }
     }
   });
 
-  async function getLikeCount(blogId: string, strapi: any): Promise<number> {
-    return await strapi.entityService.count('api::like.like', {
-      filters: {
-        post: { id: blogId }
-      }
-    });
+  async function getLikeCount(blog: string, strapi: any): Promise<number> {
+
+    const count = await strapi.db.query('api::post.post').findMany({
+      where: {
+        documentId: blog
+      },
+      populate: {likes: true}
+    })
+    return count[0].likes.length;
+  }
+
+  async function getCommentCount(blog: string, strapi: any): Promise<number> {
+    const count =  await strapi.db.query('api::post.post').findMany({
+      where: {
+        documentId: blog
+      },
+      populate: {comments: true}
+    })
+    return count[0].comments.length;
   }
 },
   /**
