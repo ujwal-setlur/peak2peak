@@ -59,7 +59,7 @@
       "mappedBy": "post"
     },
     "description": {
-      "type": "richtext"
+      "type": "blocks"
     }
   }
 }

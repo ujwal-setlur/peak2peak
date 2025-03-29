@@ -395,7 +395,7 @@ export interface ApiAboutUsAboutUs extends Struct.SingleTypeSchema {
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    Video: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
+    Video: Schema.Attribute.Media<'videos' | 'files' | 'images' | 'audios'>;
   };
 }
 
@@ -567,7 +567,7 @@ export interface ApiPostPost extends Struct.CollectionTypeSchema {
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    description: Schema.Attribute.RichText;
+    description: Schema.Attribute.Blocks;
     externalLink: Schema.Attribute.String;
     images: Schema.Attribute.Media<'images', true>;
     likes: Schema.Attribute.Relation<'oneToMany', 'api::like.like'>;

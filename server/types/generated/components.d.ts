@@ -8,7 +8,7 @@ export interface BlocksHeroSection extends Struct.ComponentSchema {
   };
   attributes: {
     description: Schema.Attribute.Text;
-    heading: Schema.Attribute.Blocks;
+    heading: Schema.Attribute.String;
     logo: Schema.Attribute.Component<'elements.logo', false>;
     longDescription: Schema.Attribute.RichText;
     ProfileDetails: Schema.Attribute.Component<'profile-info.profile', false>;

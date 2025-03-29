@@ -1,4 +1,4 @@
-import type { Core } from '@strapi/strapi';
+import { Core } from '@strapi/strapi';
 
 export default {
   /**
@@ -34,17 +34,28 @@ export default {
             }
 
             try {
-              const post = await strapi.documents("api::post.post").findMany();
-
-              const existingLike = await strapi.entityService.findMany('api::like.like', {
-                filters: {
-                  visitorId: visitorId,
-                  post: blog
-                }
+              // const post = await strapi.documents("api::post.post").findMany();
+              const post = await strapi.db.query('api::post.post').findMany({
+                where: {
+                  documentId: blog
+                },
+                populate: {likes: true}
               });
+              console.log("post", post.map((like)=> like.likes));
 
-              if (existingLike.length > 0) {
-                await strapi.entityService.delete('api::like.like', existingLike[0].id);
+              if (!post || post.length === 0) {
+                throw new Error("Post not found");
+              }
+
+              const postId = post[0].id;
+              const like = post[0].likes;
+              console.log("like", like)
+
+
+              const existingLike = like.find((like) => like.visitorId === visitorId);
+
+              if (existingLike) {
+                await strapi.entityService.delete('api::like.like', existingLike.id);
                 return {
                   action: 'unliked',
                   likeCount: await getLikeCount(blog, strapi),
