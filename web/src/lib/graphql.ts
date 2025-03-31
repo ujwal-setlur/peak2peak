@@ -1,8 +1,6 @@
 import { GraphQLClient, gql } from 'graphql-request';
 
-const endpoint =
-  (import.meta.env.ASTRO_PUBLIC_GRAPHQL_API_BASE_URL as string) ||
-  'https://1337--main--athul-workspace--athul-evolvier.workspace.evolvier.com/graphql';
+const endpoint = (import.meta.env.PUBLIC_GRAPHQL_API_BASE_URL as string) || '';
 
 const client = new GraphQLClient(endpoint, {
   headers: {
