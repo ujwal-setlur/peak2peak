@@ -25,6 +25,8 @@ npm install
 yarn install
 ```
 
+Create a new .env file in root folder of the project and add environment variables as given in .env.example file
+
 ### Scripts
 
 Run the following commands based on your needs, from a terminal:
