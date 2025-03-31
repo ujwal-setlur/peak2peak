@@ -2,7 +2,8 @@ import React, { useState, useEffect, useRef } from 'react';
 import TabBarItem from './TabBarItem';
 import PostCard from './PostCard';
 import { fetchPosts } from '../lib/graphql';
-import { PostModall } from './PostModal';
+import { PostModal } from './PostModal';
+import Peak2PeakLogo from '../assets/peak2peak.svg';
 // import { CategoryItem } from "../types/home";
 // import { PostItem } from "../types/posts";
 
@@ -19,7 +20,7 @@ type PostItem = {
   commentsCount?: number;
 };
 
-interface PostssProps {
+interface PostsProps {
   categories: {
     Name?: string;
     icon?: {
@@ -29,7 +30,7 @@ interface PostssProps {
   }[];
 }
 
-export const Postss: React.FC<PostssProps> = ({ categories }) => {
+export const Posts: React.FC<PostsProps> = ({ categories }) => {
   const [activeTab, setActiveTab] = useState<string | undefined>(categories?.[0]?.slug || '');
   const [isDetailsModalOpen, setIsDetailsModalOpen] = useState<boolean>(false);
   const [selectedPostId, setSelectedPostId] = useState<string>('');
@@ -41,7 +42,6 @@ export const Postss: React.FC<PostssProps> = ({ categories }) => {
 
   // Function to fetch posts that doesn't depend on useEffect
   const fetchPostsData = async (tabSlug: string) => {
-    console.log('tabSlug', tabSlug);
     if (!tabSlug) return;
 
     setLoading(true);
@@ -114,8 +114,10 @@ export const Postss: React.FC<PostssProps> = ({ categories }) => {
                 {[...Array(3)].map((_, index) => (
                   <div
                     key={index}
-                    className="aspect-square h-full w-full animate-pulse overflow-hidden rounded-lg bg-gray-300"
-                  ></div>
+                    className="flex aspect-square h-full w-full animate-pulse items-center justify-center overflow-hidden bg-gray-300 p-12"
+                  >
+                    <img src={Peak2PeakLogo.src} alt="like" className="opacity-80" />
+                  </div>
                 ))}
               </>
             ) : posts && posts.length > 0 ? (
@@ -130,7 +132,8 @@ export const Postss: React.FC<PostssProps> = ({ categories }) => {
       </div>
       {posts?.map((post) => {
         return (
-          <PostModall
+          <PostModal
+            key={post.documentId}
             isOpen={isDetailsModalOpen && post.documentId === selectedPostId}
             postId={selectedPostId || ''}
             onClose={handleCloseDetailsModal}

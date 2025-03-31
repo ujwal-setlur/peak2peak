@@ -6,13 +6,13 @@ import CommentIcon from '../assets/comment-primary.svg';
 import { formatDate, strapiRichTextToHtml } from '../lib/utils';
 import { getInitials } from '../utils';
 
-interface PostModallProps {
+interface PostModalProps {
   isOpen: boolean;
   postId: string;
   onClose: () => void;
 }
 
-export const PostModall: React.FC<PostModallProps> = ({ isOpen, postId, onClose }) => {
+export const PostModal: React.FC<PostModalProps> = ({ isOpen, postId, onClose }) => {
   const [postDetails, setPostDetails] = useState<any>();
 
   const [loading, setLoading] = useState(false);
@@ -78,9 +78,9 @@ export const PostModall: React.FC<PostModallProps> = ({ isOpen, postId, onClose 
             >
               <svg className="h-15 w-15" fill="#ffffff" stroke="#ffffff" viewBox="0 0 24 24">
                 <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="1"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="1"
                   d="M6 18L18 6M6 6l12 12"
                 ></path>
               </svg>
@@ -161,7 +161,7 @@ export const PostModall: React.FC<PostModallProps> = ({ isOpen, postId, onClose 
                   </div>
                   <button
                     type="button"
-                    className="w-[150px] self-start bg-gradient-to-r from-teal-500 to-teal-800 px-1 py-1.5 text-xs tracking-wider text-white hover:from-teal-800 hover:to-teal-500 hover:font-medium"
+                    className="w-[150px] self-start bg-gradient-to-r from-teal-500 to-teal-800 px-1 py-2 text-xs tracking-wider text-white hover:from-teal-800 hover:to-teal-500 hover:font-medium"
                   >
                     SUBMIT
                   </button>

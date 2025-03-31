@@ -82,7 +82,6 @@ export const fetchHomeData = async () => {
 
 // Fetch posts
 export const fetchPosts = async (filters: any) => {
-  console.log('filters', filters);
   const query = gql`
     query Posts($filters: PostFiltersInput) {
       posts(filters: $filters) {

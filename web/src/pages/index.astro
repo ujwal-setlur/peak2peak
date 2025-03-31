@@ -2,32 +2,23 @@
 import Layout from '../layouts/Layout.astro';
 
 import Welcome from '../components/Welcome.astro';
-// import Posts from '../components/Posts.astro';
-
-// import heroImage from '../assets/homeBg.png';
-
 import { fetchHomeData } from '../lib/graphql';
 import { Image } from '../types/common';
-import {
-  // CategoryItem,
-  HeroSectionData,
-} from '../types/home';
-import { Postss } from '../components/Posts';
+import { HeroSectionData } from '../types/home';
+import { Posts } from '../components/Posts';
 
 // Initialize loading state
 // let isLoading = true;
 
+type CategoryItem = {
+  Name?: string;
+  icon?: Image;
+  slug?: string;
+};
+
 let heroImage: Image | null = null;
 let heroSection: HeroSectionData | null = null;
-let categories:
-  | {
-      Name?: string;
-      icon?: {
-        url?: string;
-      };
-      slug?: string;
-    }[]
-  | null = null;
+let categories: CategoryItem[] | null = null;
 
 try {
   const data: any = await fetchHomeData();
@@ -56,8 +47,7 @@ try {
       >
       </div>
       <Welcome data={heroSection} />
-      <!-- <Posts categories={categories || []} /> -->
-      <Postss client:load categories={categories || []} />
+      <Posts client:load categories={categories || []} />
     </main>
   </div>
 </Layout>
