@@ -9,6 +9,9 @@ export default {
         secondary: {
           DEFAULT: '#FFC31F',
         },
+        border: {
+          DEFAULT: '#707070',
+        },
       },
       fontFamily: {
         sans: ['Poppins', 'sans-serif'],
