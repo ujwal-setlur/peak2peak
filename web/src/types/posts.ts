@@ -33,12 +33,13 @@ export type PostDetails = {
   title?: string;
   documentId?: string;
   comments: {
-    name?: string;
+    user?: string;
     comment?: string;
     createdAt?: string;
     email?: string;
   }[];
   description?: any;
-  likesCount?: number;
-  commentsCount?: number;
+  likeCounts?: number;
+  commentCount?: number;
+  allowComments?: boolean;
 };

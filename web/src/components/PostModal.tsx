@@ -6,6 +6,35 @@ import CommentIcon from '../assets/comment-primary.svg';
 import { formatDate, strapiRichTextToHtml } from '../lib/utils';
 import { getInitials } from '../utils';
 
+type PostDetails = {
+  blog?: {
+    Name?: string;
+    slug?: string;
+    icon?: {
+      url?: string;
+    };
+  };
+  createdAt?: string;
+  images?: {
+    url?: string;
+  }[];
+  thumbNail?: {
+    url?: string;
+  };
+  title?: string;
+  documentId?: string;
+  comments: {
+    user?: string;
+    comment?: string;
+    createdAt?: string;
+    email?: string;
+  }[];
+  description?: any;
+  likeCounts?: number;
+  commentCount?: number;
+  allowComments?: boolean;
+};
+
 interface PostModalProps {
   isOpen: boolean;
   postId: string;
@@ -13,7 +42,7 @@ interface PostModalProps {
 }
 
 export const PostModal: React.FC<PostModalProps> = ({ isOpen, postId, onClose }) => {
-  const [postDetails, setPostDetails] = useState<any>();
+  const [postDetails, setPostDetails] = useState<PostDetails | null>(null);
 
   const [loading, setLoading] = useState(false);
 
@@ -109,7 +138,7 @@ export const PostModal: React.FC<PostModalProps> = ({ isOpen, postId, onClose })
                     <img src={LikeIcon.src} alt="like" className="h-8 w-8 fill-primary" />
                   </button>
                   <span className="text-md font-medium text-black" id={`likes-${postId}`}>
-                    {postDetails?.likesCount || 0}
+                    {postDetails?.likeCounts || 0}
                   </span>
                 </div>
                 <div className="text-md font-thin text-black">|</div>
@@ -122,7 +151,7 @@ export const PostModal: React.FC<PostModalProps> = ({ isOpen, postId, onClose })
                     <img src={CommentIcon.src} alt="comment" className="h-8 w-8 fill-primary" />
                   </button>
                   <span className="text-md font-medium text-black" id={`comments-count-${postId}`}>
-                    {postDetails?.comments?.length || 0}
+                    {postDetails?.commentCount || 0}
                   </span>
                 </div>
               </div>
@@ -172,7 +201,7 @@ export const PostModal: React.FC<PostModalProps> = ({ isOpen, postId, onClose })
                   id={`comments-${postId}`}
                 >
                   {postDetails && postDetails?.comments && postDetails?.comments?.length
-                    ? postDetails.comments.map((comment: any, index: number) => {
+                    ? postDetails.comments.map((comment, index) => {
                         const isLastComment =
                           postDetails?.comments?.length &&
                           index === postDetails.comments.length - 1;
@@ -181,10 +210,10 @@ export const PostModal: React.FC<PostModalProps> = ({ isOpen, postId, onClose })
                             className={`flex gap-3 ${!isLastComment ? 'border-b-[1px] pb-3' : ''}`}
                           >
                             <div className="flex h-[50px] w-[50px] shrink-0 items-center justify-center rounded-full bg-primary text-sm font-medium text-white">
-                              {comment.name ? getInitials(comment.name) : ''}
+                              {comment.user ? getInitials(comment.user) : ''}
                             </div>
                             <div className="flex flex-col">
-                              <span className="text-xs font-medium text-black">{comment.name}</span>
+                              <span className="text-xs font-medium text-black">{comment.user}</span>
                               <span className="text-xs font-thin text-black">
                                 {comment.comment}
                               </span>

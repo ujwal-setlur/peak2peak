@@ -8,6 +8,7 @@ export type CategoryItem = {
     url?: string;
   };
   slug?: string;
+  postCount?: number;
 };
 
 export type ProfileDetails = {

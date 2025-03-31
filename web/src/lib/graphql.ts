@@ -72,6 +72,7 @@ export const fetchHomeData = async () => {
             url
           }
           slug
+          postCount
         }
       }
     }
@@ -81,10 +82,10 @@ export const fetchHomeData = async () => {
 };
 
 // Fetch posts
-export const fetchPosts = async (filters: any) => {
+export const fetchPosts = async (filters: any, pagination: any, sort: any) => {
   const query = gql`
-    query Posts($filters: PostFiltersInput) {
-      posts(filters: $filters) {
+    query Posts($filters: PostFiltersInput, $pagination: PaginationArg, $sort: [String]) {
+      posts(filters: $filters, pagination: $pagination, sort: $sort) {
         documentId
         blog {
           slug
@@ -97,7 +98,7 @@ export const fetchPosts = async (filters: any) => {
     }
   `;
 
-  return client.request(query, { filters });
+  return client.request(query, { filters, pagination, sort });
 };
 
 // Fetch post details
@@ -122,12 +123,15 @@ export const fetchPostDetails = async (documentId: string) => {
         title
         documentId
         comments {
-          name
           comment
           createdAt
           email
+          user
         }
         description
+        allowComments
+        commentCount
+        likeCounts
       }
     }
   `;
