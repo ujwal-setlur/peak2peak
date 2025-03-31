@@ -1,5 +1,16 @@
 import type { Schema, Struct } from '@strapi/strapi';
 
+export interface BlocksContactInfoBlock extends Struct.ComponentSchema {
+  collectionName: 'components_blocks_contact_info_blocks';
+  info: {
+    displayName: 'Contact Info Block';
+  };
+  attributes: {
+    Image: Schema.Attribute.Media<'images'>;
+    Info: Schema.Attribute.Blocks;
+  };
+}
+
 export interface BlocksHeroSection extends Struct.ComponentSchema {
   collectionName: 'components_blocks_hero_sections';
   info: {
@@ -52,6 +63,20 @@ export interface ElementsLogo extends Struct.ComponentSchema {
   };
 }
 
+export interface FormForm extends Struct.ComponentSchema {
+  collectionName: 'components_form_forms';
+  info: {
+    description: '';
+    displayName: 'Contact Form';
+  };
+  attributes: {
+    Email: Schema.Attribute.Email;
+    Message: Schema.Attribute.Text;
+    Name: Schema.Attribute.String;
+    PhoneNumber: Schema.Attribute.String;
+  };
+}
+
 export interface LayoutHeader extends Struct.ComponentSchema {
   collectionName: 'components_layout_headers';
   info: {
@@ -95,10 +120,12 @@ export interface SocialSocialLinks extends Struct.ComponentSchema {
 declare module '@strapi/strapi' {
   export module Public {
     export interface ComponentSchemas {
+      'blocks.contact-info-block': BlocksContactInfoBlock;
       'blocks.hero-section': BlocksHeroSection;
       'blocks.info-block': BlocksInfoBlock;
       'elements.link': ElementsLink;
       'elements.logo': ElementsLogo;
+      'form.form': FormForm;
       'layout.header': LayoutHeader;
       'profile-info.profile': ProfileInfoProfile;
       'social.social-links': SocialSocialLinks;

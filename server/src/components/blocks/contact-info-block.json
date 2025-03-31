@@ -1,0 +1,19 @@
+{
+  "collectionName": "components_blocks_contact_info_blocks",
+  "info": {
+    "displayName": "Contact Info Block"
+  },
+  "options": {},
+  "attributes": {
+    "Info": {
+      "type": "blocks"
+    },
+    "Image": {
+      "allowedTypes": [
+        "images"
+      ],
+      "type": "media",
+      "multiple": false
+    }
+  }
+}

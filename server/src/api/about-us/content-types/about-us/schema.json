@@ -27,6 +27,9 @@
       "components": [
         "blocks.info-block"
       ]
+    },
+    "Heading": {
+      "type": "string"
     }
   }
 }
