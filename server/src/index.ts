@@ -1,5 +1,4 @@
 import { Core } from '@strapi/strapi';
-import post from './api/post/controllers/post';
 
 export default {
   /**
@@ -41,8 +40,21 @@ export default {
       type Mutation {
         addComment(blog: ID!, email: String!, name: String!, comment: String!): CommentResponse
       }
+      type Category {
+        postCount: Int
+      }
     `,
     resolvers: {
+      Category: {
+        postCount: async (parent, args, context) => {
+          const blogId = parent.id;
+          const posts = await strapi.db.query("api::post.post").findMany({
+            where: { blog: blogId },
+          });
+
+          return posts.length;
+        }
+      },
       Post: {
         likeCounts: async (parent, args, context) => {
           return await getLikeCount(parent.documentId, strapi);

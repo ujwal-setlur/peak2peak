@@ -15,7 +15,9 @@
       "type": "text"
     },
     "description": {
-      "type": "text"
+      "type": "text",
+      "maxLength": 200,
+      "minLength": 50
     },
     "ProfileDetails": {
       "type": "component",
@@ -23,7 +25,9 @@
       "component": "profile-info.profile"
     },
     "longDescription": {
-      "type": "richtext"
+      "type": "richtext",
+      "minLength": 100,
+      "maxLength": 550
     },
     "heading": {
       "type": "string"

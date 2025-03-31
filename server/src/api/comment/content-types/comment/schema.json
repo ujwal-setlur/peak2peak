@@ -11,9 +11,6 @@
   },
   "attributes": {
     "comment": {
-      "type": "text"
-    },
-    "name": {
       "type": "string"
     },
     "email": {
@@ -24,6 +21,9 @@
       "relation": "manyToOne",
       "target": "api::post.post",
       "inversedBy": "comments"
+    },
+    "user": {
+      "type": "string"
     }
   }
 }

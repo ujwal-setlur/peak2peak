@@ -14,24 +14,16 @@
     "Heading": {
       "type": "string"
     },
-    "Video": {
+    "Media": {
       "type": "media",
-      "multiple": false,
+      "multiple": true,
       "required": false,
       "allowedTypes": [
-        "videos"
+        "videos",
+        "images",
+        "audios",
+        "files"
       ]
-    },
-    "Title": {
-      "type": "richtext"
-    },
-    "Description": {
-      "type": "richtext"
-    },
-    "Info": {
-      "type": "component",
-      "repeatable": false,
-      "component": "blocks.contact-info-block"
     }
   }
 }

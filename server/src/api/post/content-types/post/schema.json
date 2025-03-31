@@ -52,14 +52,18 @@
         "images"
       ]
     },
+    "description": {
+      "type": "blocks"
+    },
     "comments": {
       "type": "relation",
       "relation": "oneToMany",
       "target": "api::comment.comment",
       "mappedBy": "post"
     },
-    "description": {
-      "type": "blocks"
+    "allowComments": {
+      "type": "boolean",
+      "default": true
     }
   }
 }
