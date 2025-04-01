@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { fetchPostDetails } from '../lib/graphql';
+import { fetchPostDetails, toggleLike } from '../lib/graphql';
 
 import LikeIcon from '../assets/like-primary.svg';
+import LikedIcon from '../assets/liked.svg';
 import CommentIcon from '../assets/comment-primary.svg';
 import { formatDate, strapiRichTextToHtml } from '../lib/utils';
 import { getInitials } from '../utils';
@@ -33,6 +34,7 @@ type PostDetails = {
   likeCounts?: number;
   commentCount?: number;
   allowComments?: boolean;
+  isLiked?: boolean;
 };
 
 interface PostModalProps {
@@ -45,15 +47,19 @@ export const PostModal: React.FC<PostModalProps> = ({ isOpen, postId, onClose })
   const [postDetails, setPostDetails] = useState<PostDetails | null>(null);
 
   const [loading, setLoading] = useState(false);
+  const [isLikeLoading, setIsLikeLoading] = useState(false);
 
   // Use ref to track if component is mounted
   const isMounted = useRef(false);
 
   // Function to fetch posts that doesn't depend on useEffect
-  const fetchPostDetailsData = async (postId: string) => {
-    setLoading(true);
+  const fetchPostDetailsData = async (postId: string, disableLoading?: boolean) => {
+    if (!disableLoading) {
+      setLoading(true);
+    }
     try {
-      const data: any = await fetchPostDetails(postId);
+      const visitorId = (window as any).visitorId || '';
+      const data: any = await fetchPostDetails(postId, visitorId);
 
       // Only update state if component is still mounted
       if (isMounted.current) {
@@ -68,17 +74,35 @@ export const PostModal: React.FC<PostModalProps> = ({ isOpen, postId, onClose })
     }
   };
 
-  // Initial fetch on mount
+  // Initial post details fetch on mount
   useEffect(() => {
     isMounted.current = true;
-
-    // Initial data fetch
     fetchPostDetailsData(postId as string);
 
     return () => {
       isMounted.current = false;
     };
   }, [postId]);
+
+  // Function to handle like button click
+  const handleClickLike = async () => {
+    setIsLikeLoading(true);
+    try {
+      const visitorId = (window as any).visitorId || '';
+      await toggleLike(postId, visitorId);
+
+      // Only update state if component is still mounted
+      if (isMounted.current) {
+        fetchPostDetailsData(postId as string, true);
+      }
+    } catch (error) {
+      console.error('Error liking the post:', error);
+    } finally {
+      if (isMounted.current) {
+        setIsLikeLoading(false);
+      }
+    }
+  };
 
   if (!isOpen || loading) {
     return null;
@@ -134,8 +158,14 @@ export const PostModal: React.FC<PostModalProps> = ({ isOpen, postId, onClose })
                     className="text-teal-600 hover:text-teal-800"
                     data-action="like"
                     data-post-id={postId}
+                    disabled={isLikeLoading}
+                    onClick={handleClickLike}
                   >
-                    <img src={LikeIcon.src} alt="like" className="h-8 w-8 fill-primary" />
+                    <img
+                      src={postDetails?.isLiked ? LikedIcon.src : LikeIcon.src}
+                      alt="like"
+                      className="h-8 w-8 fill-primary"
+                    />
                   </button>
                   <span className="text-md font-medium text-black" id={`likes-${postId}`}>
                     {postDetails?.likeCounts || 0}
@@ -144,7 +174,7 @@ export const PostModal: React.FC<PostModalProps> = ({ isOpen, postId, onClose })
                 <div className="text-md font-thin text-black">|</div>
                 <div className="flex items-center gap-4">
                   <button
-                    className="text-teal-600 hover:text-teal-800"
+                    className="cursor-default text-teal-600 hover:text-teal-800"
                     data-action="like"
                     data-post-id={postId}
                   >
@@ -207,6 +237,7 @@ export const PostModal: React.FC<PostModalProps> = ({ isOpen, postId, onClose })
                           index === postDetails.comments.length - 1;
                         return (
                           <li
+                            key={index}
                             className={`flex gap-3 ${!isLastComment ? 'border-b-[1px] pb-3' : ''}`}
                           >
                             <div className="flex h-[50px] w-[50px] shrink-0 items-center justify-center rounded-full bg-primary text-sm font-medium text-white">

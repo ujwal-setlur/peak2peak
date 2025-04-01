@@ -14,8 +14,8 @@ type PostCardProps = {
       url?: string;
     };
     title?: string;
-    likesCount?: number;
-    commentsCount?: number;
+    likeCounts?: number;
+    commentCount?: number;
   } | null;
   onClick: (postId: string) => void;
 };
@@ -44,13 +44,13 @@ const PostCard: React.FC<PostCardProps> = ({ data, onClick }) => {
         <div className="flex flex-col items-center justify-center gap-2">
           <img src={LikeIcon.src} alt="like" className="h-6 sm:h-7 lg:h-10" />
           <span className="text-sm font-medium text-white sm:text-base lg:text-md">
-            {data?.likesCount || 0}
+            {data?.likeCounts || 0}
           </span>
         </div>
         <div className="flex flex-col items-center justify-center gap-2">
           <img src={CommentIcon.src} alt="like" className="h-6 sm:h-7 lg:h-10" />
           <span className="text-sm font-medium text-white sm:text-base lg:text-md">
-            {data?.commentsCount || 0}
+            {data?.commentCount || 0}
           </span>
         </div>
       </div>

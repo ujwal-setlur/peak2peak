@@ -17,8 +17,8 @@ type PostItem = {
     url?: string;
   };
   title?: string;
-  likesCount?: number;
-  commentsCount?: number;
+  likeCounts?: number;
+  commentCount?: number;
 };
 
 interface PostsProps {

@@ -1,8 +1,6 @@
 import { GraphQLClient, gql } from 'graphql-request';
 
-const endpoint =
-  (import.meta.env.ASTRO_PUBLIC_GRAPHQL_API_BASE_URL as string) ||
-  'https://1337--main--athul-workspace--athul-evolvier.workspace.evolvier.com/graphql';
+const endpoint = (import.meta.env.PUBLIC_GRAPHQL_API_BASE_URL as string) || '';
 
 const client = new GraphQLClient(endpoint, {
   headers: {
@@ -94,6 +92,8 @@ export const fetchPosts = async (filters: any, pagination: any, sort: any) => {
           url
         }
         title
+        likeCounts
+        commentCount
       }
     }
   `;
@@ -102,9 +102,9 @@ export const fetchPosts = async (filters: any, pagination: any, sort: any) => {
 };
 
 // Fetch post details
-export const fetchPostDetails = async (documentId: string) => {
+export const fetchPostDetails = async (documentId: string, visitorId: string) => {
   const query = gql`
-    query Post($documentId: ID!) {
+    query Post($documentId: ID!, $visitorId: String!) {
       post(documentId: $documentId) {
         blog {
           Name
@@ -132,9 +132,51 @@ export const fetchPostDetails = async (documentId: string) => {
         allowComments
         commentCount
         likeCounts
+        isLiked(visitorId: $visitorId)
       }
     }
   `;
 
-  return client.request(query, { documentId });
+  return client.request(query, { documentId, visitorId });
+};
+
+// Mutation to toggle like
+export const toggleLike = async (blog: string, visitorId: string) => {
+  const mutation = gql`
+    mutation ToggleLike($blog: ID!, $visitorId: String!) {
+      toggleLike(blog: $blog, visitorId: $visitorId) {
+        action
+      }
+    }
+  `;
+
+  return client.request(mutation, { blog, visitorId });
+};
+
+// Mutation to add a comment
+export const addComment = async (blog: string, email: string, comment: string, user: string) => {
+  const mutation = gql`
+    mutation AddComment($blog: ID!, $email: String!, $comment: String!, $user: String!) {
+      addComment(blog: $blog, email: $email, comment: $comment, user: $user) {
+        id
+        comment
+        user
+      }
+    }
+  `;
+
+  return client.request(mutation, { blog, email, comment, user });
+};
+
+// Mutation to submit contact us form
+export const createForm = async (data: any) => {
+  const mutation = gql`
+    mutation CreateForm($data: FormInput!) {
+      createForm(data: $data) {
+        documentId
+      }
+    }
+  `;
+
+  return client.request(mutation, { data });
 };

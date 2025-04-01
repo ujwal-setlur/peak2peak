@@ -1,5 +1,5 @@
 interface ImportMetaEnv {
-  readonly ASTRO_PUBLIC_GRAPHQL_API_BASE_URL?: string;
+  readonly PUBLIC_GRAPHQL_API_BASE_URL?: string;
 }
 
 interface ImportMeta {
