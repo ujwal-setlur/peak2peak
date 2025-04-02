@@ -117,6 +117,9 @@ export const fetchPostDetails = async (documentId: string, visitorId: string) =>
         images {
           url
         }
+        video {
+          url
+        }
         thumbNail {
           url
         }

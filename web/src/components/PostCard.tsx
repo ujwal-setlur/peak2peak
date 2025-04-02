@@ -29,7 +29,7 @@ const PostCard: React.FC<PostCardProps> = ({ data, onClick }) => {
     >
       <img
         src={data?.thumbNail?.url || ''}
-        alt="post"
+        alt={data?.title || ''}
         className="cover aspect-square w-full overflow-hidden duration-300 ease-in group-hover:scale-110 group-hover:transform"
       />
       <div className="absolute inset-0 flex items-end justify-start gap-[60px] px-4 py-3">

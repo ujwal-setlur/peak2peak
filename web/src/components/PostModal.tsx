@@ -19,6 +19,9 @@ type PostDetails = {
   images?: {
     url?: string;
   }[];
+  video?: {
+    url?: string;
+  }[];
   thumbNail?: {
     url?: string;
   };
@@ -152,13 +155,23 @@ export const PostModal: React.FC<PostModalProps> = ({ isOpen, postId, onClose })
   };
 
   const renderImageSection = () => {
-    return (
-      <img
-        src={postDetails?.images?.[0]?.url || ''}
-        alt="post"
-        className="aspect-square w-full overflow-hidden object-cover"
-      />
-    );
+    const videoUrl = postDetails?.video?.[0]?.url;
+    if (videoUrl) {
+      return (
+        <video controls className="h-auto w-full">
+          <source src={videoUrl} type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
+      );
+    } else {
+      return (
+        <img
+          src={postDetails?.images?.[0]?.url || ''}
+          alt="post"
+          className="aspect-square w-full overflow-hidden object-cover"
+        />
+      );
+    }
   };
 
   const renderTitle = () => {
