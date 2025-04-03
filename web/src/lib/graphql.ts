@@ -149,7 +149,10 @@ export const fetchAboutPageData = async () => {
     query AboutUs {
       aboutUs {
         Heading
-        Media {
+        HeroImage {
+          url
+        }
+        HeroVideo {
           url
         }
         YouTubeLink
@@ -165,10 +168,13 @@ export const fetchContactPageData = async () => {
   const query = gql`
     query Contact {
       contact {
-        Media {
+        Heading
+        HeroImage {
           url
         }
-        Heading
+        HeroVideo {
+          url
+        }
       }
     }
   `;

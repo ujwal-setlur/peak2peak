@@ -14,16 +14,20 @@
     "Heading": {
       "type": "string"
     },
-    "Media": {
+    "HeroVideo": {
       "type": "media",
-      "multiple": true,
+      "multiple": false,
       "required": false,
       "allowedTypes": [
-        "videos",
-        "images",
-        "audios",
-        "files"
+        "videos"
       ]
+    },
+    "HeroImage": {
+      "allowedTypes": [
+        "images"
+      ],
+      "type": "media",
+      "multiple": false
     }
   }
 }

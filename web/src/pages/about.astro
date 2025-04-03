@@ -10,16 +10,18 @@ type Media = {
 };
 
 let heroImage: Media | null = null;
-let header: string | null = null;
+let heroVideo: Media | null = null;
+let heading: string | null = null;
 let youtubeUrl: string | null = null;
 
 try {
   const data: any = await fetchAboutPageData();
-  heroImage = data?.aboutUs?.Media;
-  header = data?.aboutUs?.Heading;
+  heroImage = data?.aboutUs?.HeroImage;
+  heroVideo = data?.aboutUs?.HeroVideo;
+  heading = data?.aboutUs?.Heading;
   youtubeUrl = data?.aboutUs?.YouTubeLink;
 } catch (error) {
-  console.error('Error fetching home data:', error);
+  console.error('Error fetching about page data:', error);
 }
 ---
 
@@ -28,14 +30,27 @@ try {
     <main class="flex w-full flex-col items-center">
       <!-- Hero Image Section -->
       <div class="relative flex w-full justify-center bg-cover bg-center bg-no-repeat">
-        <img
-          src={heroImage?.url || ''}
-          alt="Peak2Peak"
-          class="h-[60vh] w-full bg-cover bg-center bg-no-repeat"
-        />
+        {
+          heroVideo?.url ? (
+            <video
+              src={heroVideo.url}
+              autoplay
+              loop={false}
+              muted
+              playsinline
+              class="h-[60vh] w-full object-cover"
+            />
+          ) : (
+            <img
+              src={heroImage?.url}
+              alt="Peak2Peak"
+              class="h-[60vh] w-full bg-cover bg-center bg-no-repeat"
+            />
+          )
+        }
         <div class="absolute bottom-0 flex w-full max-w-screen-2xl flex-col pb-8">
           <h1 class="text-[3rem] font-bold uppercase text-white md:text-[4.25rem] md:font-black">
-            {header || 'About Us'}
+            {heading || 'About Us'}
           </h1>
         </div>
       </div>

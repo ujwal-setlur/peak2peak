@@ -11,15 +11,12 @@
     "draftAndPublish": true
   },
   "attributes": {
-    "Media": {
+    "HeroVideo": {
       "type": "media",
       "multiple": false,
       "required": false,
       "allowedTypes": [
-        "videos",
-        "files",
-        "images",
-        "audios"
+        "videos"
       ]
     },
     "Heading": {
@@ -27,6 +24,13 @@
     },
     "YouTubeLink": {
       "type": "string"
+    },
+    "HeroImage": {
+      "allowedTypes": [
+        "images"
+      ],
+      "type": "media",
+      "multiple": false
     }
   }
 }

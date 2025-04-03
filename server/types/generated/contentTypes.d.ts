@@ -385,13 +385,14 @@ export interface ApiAboutUsAboutUs extends Struct.SingleTypeSchema {
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
     Heading: Schema.Attribute.String;
+    HeroImage: Schema.Attribute.Media<'images'>;
+    HeroVideo: Schema.Attribute.Media<'videos'>;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
       'api::about-us.about-us'
     > &
       Schema.Attribute.Private;
-    Media: Schema.Attribute.Media<'videos' | 'files' | 'images' | 'audios'>;
     publishedAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
@@ -478,16 +479,14 @@ export interface ApiContactContact extends Struct.SingleTypeSchema {
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
     Heading: Schema.Attribute.String;
+    HeroImage: Schema.Attribute.Media<'images'>;
+    HeroVideo: Schema.Attribute.Media<'videos'>;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
       'api::contact.contact'
     > &
       Schema.Attribute.Private;
-    Media: Schema.Attribute.Media<
-      'videos' | 'images' | 'audios' | 'files',
-      true
-    >;
     publishedAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
