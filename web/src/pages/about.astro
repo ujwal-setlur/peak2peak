@@ -1,7 +1,26 @@
 ---
 import Layout from '../layouts/Layout.astro';
 
-import heroImage from '../assets/bg.png';
+import { YouTubeEmbed } from '../components/YoutubeEmbed';
+
+import { fetchAboutPageData } from '../lib/graphql';
+
+type Media = {
+  url?: string;
+};
+
+let heroImage: Media | null = null;
+let header: string | null = null;
+let youtubeUrl: string | null = null;
+
+try {
+  const data: any = await fetchAboutPageData();
+  heroImage = data?.aboutUs?.Media;
+  header = data?.aboutUs?.Heading;
+  youtubeUrl = data?.aboutUs?.YouTubeLink;
+} catch (error) {
+  console.error('Error fetching home data:', error);
+}
 ---
 
 <Layout>
@@ -10,16 +29,23 @@ import heroImage from '../assets/bg.png';
       <!-- Hero Image Section -->
       <div class="relative flex w-full justify-center bg-cover bg-center bg-no-repeat">
         <img
-          src={heroImage.src}
+          src={heroImage?.url || ''}
           alt="Peak2Peak"
           class="h-[60vh] w-full bg-cover bg-center bg-no-repeat"
         />
         <div class="absolute bottom-0 flex w-full max-w-screen-2xl flex-col pb-8">
-          <h1 class="text-[3rem] font-bold text-white md:text-[4.25rem] md:font-black">ABOUT US</h1>
+          <h1 class="text-[3rem] font-bold uppercase text-white md:text-[4.25rem] md:font-black">
+            {header || 'About Us'}
+          </h1>
         </div>
       </div>
 
       <div class="flex w-full max-w-screen-2xl flex-col pb-24">
+        <!-- Youtube video section -->
+        <div class="mt-10 flex w-full gap-10">
+          <YouTubeEmbed url={youtubeUrl || ''} />
+        </div>
+
         <!-- About Section 1 -->
         <div class="mt-10 flex w-full gap-10">
           <div class="flex-2 flex flex-col gap-3">

@@ -143,6 +143,39 @@ export const fetchPostDetails = async (documentId: string, visitorId: string) =>
   return client.request(query, { documentId, visitorId });
 };
 
+// Fetch about page data
+export const fetchAboutPageData = async () => {
+  const query = gql`
+    query AboutUs {
+      aboutUs {
+        Heading
+        Media {
+          url
+        }
+        YouTubeLink
+      }
+    }
+  `;
+
+  return client.request(query);
+};
+
+// Fetch contact page data
+export const fetchContactPageData = async () => {
+  const query = gql`
+    query Contact {
+      contact {
+        Media {
+          url
+        }
+        Heading
+      }
+    }
+  `;
+
+  return client.request(query);
+};
+
 // Mutation to toggle like
 export const toggleLike = async (blog: string, visitorId: string) => {
   const mutation = gql`
