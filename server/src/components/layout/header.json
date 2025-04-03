@@ -6,17 +6,18 @@
   },
   "options": {},
   "attributes": {
-    "social": {
+    "Social": {
       "type": "component",
       "repeatable": true,
       "component": "social.social-links"
     },
-    "logo": {
+    "Logo": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
       "allowedTypes": [
         "images"
-      ],
-      "type": "media",
-      "multiple": false
+      ]
     }
   }
 }

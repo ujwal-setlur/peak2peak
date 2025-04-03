@@ -4,26 +4,27 @@
   "info": {
     "singularName": "comment",
     "pluralName": "comments",
-    "displayName": "Comment"
+    "displayName": "Comment",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
   },
   "attributes": {
-    "comment": {
+    "Comment": {
       "type": "string"
     },
-    "email": {
+    "Email": {
       "type": "email"
     },
-    "post": {
+    "User": {
+      "type": "string"
+    },
+    "Post": {
       "type": "relation",
       "relation": "manyToOne",
       "target": "api::post.post",
-      "inversedBy": "comments"
-    },
-    "user": {
-      "type": "string"
+      "inversedBy": "Comments"
     }
   }
 }

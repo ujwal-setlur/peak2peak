@@ -14,10 +14,10 @@
     "Name": {
       "type": "string"
     },
-    "slug": {
+    "Slug": {
       "type": "string"
     },
-    "icon": {
+    "Icon": {
       "type": "media",
       "multiple": false,
       "required": false,

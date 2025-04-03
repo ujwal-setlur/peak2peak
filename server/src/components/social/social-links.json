@@ -6,22 +6,23 @@
   },
   "options": {},
   "attributes": {
-    "text": {
+    "Text": {
       "type": "string"
     },
-    "url": {
+    "Url": {
       "type": "string"
     },
-    "isExternal": {
+    "IsExternal": {
       "type": "boolean",
       "default": false
     },
-    "icon": {
+    "Icon": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
       "allowedTypes": [
         "images"
-      ],
-      "type": "media",
-      "multiple": false
+      ]
     }
   }
 }

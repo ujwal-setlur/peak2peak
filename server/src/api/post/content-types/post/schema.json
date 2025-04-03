@@ -11,10 +11,10 @@
     "draftAndPublish": true
   },
   "attributes": {
-    "title": {
+    "Title": {
       "type": "string"
     },
-    "images": {
+    "Images": {
       "type": "media",
       "multiple": true,
       "required": false,
@@ -22,7 +22,7 @@
         "images"
       ]
     },
-    "video": {
+    "Video": {
       "type": "media",
       "multiple": true,
       "required": false,
@@ -30,21 +30,21 @@
         "videos"
       ]
     },
-    "blog": {
+    "Category": {
       "type": "relation",
       "relation": "oneToOne",
       "target": "api::category.category"
     },
-    "likes": {
+    "Likes": {
       "type": "relation",
       "relation": "oneToMany",
       "target": "api::like.like",
       "mappedBy": "post"
     },
-    "externalLink": {
+    "ExternalLink": {
       "type": "string"
     },
-    "thumbNail": {
+    "ThumbNail": {
       "type": "media",
       "multiple": false,
       "required": false,
@@ -52,18 +52,18 @@
         "images"
       ]
     },
-    "description": {
+    "Description": {
       "type": "blocks"
     },
-    "comments": {
+    "AllowComments": {
+      "type": "boolean",
+      "default": true
+    },
+    "Comments": {
       "type": "relation",
       "relation": "oneToMany",
       "target": "api::comment.comment",
-      "mappedBy": "post"
-    },
-    "allowComments": {
-      "type": "boolean",
-      "default": true
+      "mappedBy": "Post"
     }
   }
 }

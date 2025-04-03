@@ -11,10 +11,10 @@
     "draftAndPublish": true
   },
   "attributes": {
-    "title": {
+    "Title": {
       "type": "string"
     },
-    "header": {
+    "Header": {
       "type": "component",
       "repeatable": false,
       "component": "layout.header"

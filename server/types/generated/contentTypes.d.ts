@@ -416,7 +416,7 @@ export interface ApiCategoryCategory extends Struct.CollectionTypeSchema {
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    icon: Schema.Attribute.Media<'images'>;
+    Icon: Schema.Attribute.Media<'images'>;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
@@ -425,7 +425,7 @@ export interface ApiCategoryCategory extends Struct.CollectionTypeSchema {
       Schema.Attribute.Private;
     Name: Schema.Attribute.String;
     publishedAt: Schema.Attribute.DateTime;
-    slug: Schema.Attribute.String;
+    Slug: Schema.Attribute.String;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -435,6 +435,7 @@ export interface ApiCategoryCategory extends Struct.CollectionTypeSchema {
 export interface ApiCommentComment extends Struct.CollectionTypeSchema {
   collectionName: 'comments';
   info: {
+    description: '';
     displayName: 'Comment';
     pluralName: 'comments';
     singularName: 'comment';
@@ -443,23 +444,23 @@ export interface ApiCommentComment extends Struct.CollectionTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
-    comment: Schema.Attribute.String;
+    Comment: Schema.Attribute.String;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    email: Schema.Attribute.Email;
+    Email: Schema.Attribute.Email;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
       'api::comment.comment'
     > &
       Schema.Attribute.Private;
-    post: Schema.Attribute.Relation<'manyToOne', 'api::post.post'>;
+    Post: Schema.Attribute.Relation<'manyToOne', 'api::post.post'>;
     publishedAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    user: Schema.Attribute.String;
+    User: Schema.Attribute.String;
   };
 }
 
@@ -537,7 +538,7 @@ export interface ApiGlobalGlobal extends Struct.SingleTypeSchema {
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    header: Schema.Attribute.Component<'layout.header', false>;
+    Header: Schema.Attribute.Component<'layout.header', false>;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
@@ -545,7 +546,7 @@ export interface ApiGlobalGlobal extends Struct.SingleTypeSchema {
     > &
       Schema.Attribute.Private;
     publishedAt: Schema.Attribute.DateTime;
-    title: Schema.Attribute.String;
+    Title: Schema.Attribute.String;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -564,11 +565,14 @@ export interface ApiHomePageHomePage extends Struct.SingleTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
-    blogs: Schema.Attribute.Relation<'oneToMany', 'api::category.category'>;
+    Categories: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::category.category'
+    >;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    HeroSection: Schema.Attribute.DynamicZone<['blocks.hero-section']>;
+    HeroSection: Schema.Attribute.Component<'blocks.hero-section', false>;
     Image: Schema.Attribute.Media<'images' | 'videos'>;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
@@ -622,26 +626,26 @@ export interface ApiPostPost extends Struct.CollectionTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
-    allowComments: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<true>;
-    blog: Schema.Attribute.Relation<'oneToOne', 'api::category.category'>;
-    comments: Schema.Attribute.Relation<'oneToMany', 'api::comment.comment'>;
+    AllowComments: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<true>;
+    Category: Schema.Attribute.Relation<'oneToOne', 'api::category.category'>;
+    Comments: Schema.Attribute.Relation<'oneToMany', 'api::comment.comment'>;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    description: Schema.Attribute.Blocks;
-    externalLink: Schema.Attribute.String;
-    images: Schema.Attribute.Media<'images', true>;
-    likes: Schema.Attribute.Relation<'oneToMany', 'api::like.like'>;
+    Description: Schema.Attribute.Blocks;
+    ExternalLink: Schema.Attribute.String;
+    Images: Schema.Attribute.Media<'images', true>;
+    Likes: Schema.Attribute.Relation<'oneToMany', 'api::like.like'>;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<'oneToMany', 'api::post.post'> &
       Schema.Attribute.Private;
     publishedAt: Schema.Attribute.DateTime;
-    thumbNail: Schema.Attribute.Media<'images'>;
-    title: Schema.Attribute.String;
+    ThumbNail: Schema.Attribute.Media<'images'>;
+    Title: Schema.Attribute.String;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    video: Schema.Attribute.Media<'videos', true>;
+    Video: Schema.Attribute.Media<'videos', true>;
   };
 }
 

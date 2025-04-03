@@ -18,7 +18,7 @@
       "type": "relation",
       "relation": "manyToOne",
       "target": "api::post.post",
-      "inversedBy": "likes"
+      "inversedBy": "Likes"
     }
   }
 }

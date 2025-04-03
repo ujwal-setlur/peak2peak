@@ -6,31 +6,27 @@
   },
   "options": {},
   "attributes": {
-    "logo": {
+    "LogoSection": {
       "type": "component",
       "repeatable": false,
       "component": "elements.logo"
-    },
-    "title": {
-      "type": "text"
-    },
-    "description": {
-      "type": "text",
-      "maxLength": 200,
-      "minLength": 50
     },
     "ProfileDetails": {
       "type": "component",
       "repeatable": false,
       "component": "profile-info.profile"
     },
-    "longDescription": {
-      "type": "richtext",
-      "minLength": 100,
-      "maxLength": 550
-    },
-    "heading": {
+    "MainHeading": {
       "type": "string"
+    },
+    "SubTitle": {
+      "type": "string"
+    },
+    "ShortDescription": {
+      "type": "text"
+    },
+    "LongDescription": {
+      "type": "blocks"
     }
   }
 }
