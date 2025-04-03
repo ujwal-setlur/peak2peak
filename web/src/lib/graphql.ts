@@ -91,6 +91,9 @@ export const fetchPosts = async (filters: any, pagination: any, sort: any) => {
         thumbNail {
           url
         }
+        images {
+          url
+        }
         title
         likeCounts
         commentCount

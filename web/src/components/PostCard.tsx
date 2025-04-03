@@ -13,6 +13,9 @@ type PostCardProps = {
     thumbNail?: {
       url?: string;
     };
+    images?: {
+      url?: string;
+    }[];
     title?: string;
     likeCounts?: number;
     commentCount?: number;
@@ -28,7 +31,7 @@ const PostCard: React.FC<PostCardProps> = ({ data, onClick }) => {
       onClick={() => onClick && onClick(data?.documentId || '')}
     >
       <img
-        src={data?.thumbNail?.url || ''}
+        src={data?.thumbNail?.url || data?.images?.[0]?.url || undefined}
         alt={data?.title || ''}
         className="cover aspect-square w-full overflow-hidden duration-300 ease-in group-hover:scale-110 group-hover:transform"
       />
