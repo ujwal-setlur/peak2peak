@@ -11,7 +11,11 @@ export interface BlocksHeroSection extends Struct.ComponentSchema {
     LongDescription: Schema.Attribute.Blocks;
     MainHeading: Schema.Attribute.String;
     ProfileDetails: Schema.Attribute.Component<'profile-info.profile', false>;
-    ShortDescription: Schema.Attribute.Text;
+    ShortDescription: Schema.Attribute.Text &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 180;
+        minLength: 50;
+      }>;
     SubTitle: Schema.Attribute.String;
   };
 }
