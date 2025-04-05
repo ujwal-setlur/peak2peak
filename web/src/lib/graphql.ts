@@ -1,5 +1,11 @@
 import { GraphQLClient, gql } from 'graphql-request';
-import { ContactFormData } from '../types/common';
+
+type ContactFormData = {
+  Name: string;
+  Email: string;
+  Phone: string;
+  Message: string;
+};
 
 const endpoint = (import.meta.env.PUBLIC_GRAPHQL_API_BASE_URL as string) || '';
 

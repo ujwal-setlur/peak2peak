@@ -64,3 +64,8 @@ function renderNode(node: any): string {
 export function strapiRichTextToHtml(content: any[]): string {
   return content.map((node) => renderNode(node)).join('');
 }
+
+export const isValidEmail = (email: string) =>
+  /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/.test(email);
+
+export const isValidPhone = (phone: string) => /^\d{10}$/.test(phone);

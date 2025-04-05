@@ -4,6 +4,7 @@ import Layout from '../layouts/Layout.astro';
 import contactImage from '../assets/bg.png';
 
 import { fetchContactPageData } from '../lib/graphql';
+import { ContactForm } from '../components/ContactForm';
 
 type Media = {
   url?: string;
@@ -81,39 +82,7 @@ try {
             </div>
 
             <!-- Contact Form Section -->
-            <form class="flex flex-col gap-3">
-              <div class="mt-3 flex flex-col gap-5">
-                <input
-                  type="text"
-                  name="name"
-                  placeholder="Your name*"
-                  class="w-full border-[1px] border-border border-opacity-75 px-3 py-2 text-[0.9rem] font-thin italic focus:border-opacity-0 focus:outline-none focus:ring-2 focus:ring-primary"
-                />
-                <input
-                  type="text"
-                  name="email"
-                  placeholder="Your Email*"
-                  class="w-full border-[1px] border-border border-opacity-75 px-3 py-2 text-[0.9rem] font-thin italic focus:border-opacity-0 focus:outline-none focus:ring-2 focus:ring-primary"
-                />
-                <input
-                  type="text"
-                  name="phone"
-                  placeholder="Phone Number*"
-                  class="w-full border-[1px] border-border border-opacity-75 px-3 py-2 text-[0.9rem] font-thin italic focus:border-opacity-0 focus:outline-none focus:ring-2 focus:ring-primary"
-                />
-                <textarea
-                  name="comment"
-                  placeholder="Write Message*"
-                  class="min-h-[150px] w-full border-[1px] border-border border-opacity-75 px-3 py-2 text-[0.9rem] font-thin italic focus:border-opacity-0 focus:outline-none focus:ring-2 focus:ring-primary"
-                ></textarea>
-              </div>
-              <button
-                type="button"
-                class="mt-2 w-[225px] self-start bg-gradient-to-r from-teal-500 to-teal-800 px-1 py-2 text-xs tracking-wider text-white hover:from-teal-800 hover:to-teal-500 hover:font-medium"
-              >
-                SEND MESSAGE
-              </button>
-            </form>
+            <ContactForm client:load />
           </div>
 
           <!-- Contact Info Section -->

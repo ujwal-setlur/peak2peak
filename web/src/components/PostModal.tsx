@@ -1,11 +1,13 @@
 import React, { useState, useEffect, useRef } from 'react';
+import toast, { Toaster } from 'react-hot-toast';
+
 import { addComment, fetchPostDetails, toggleLike } from '../lib/graphql';
+import { formatDate, isValidEmail, strapiRichTextToHtml } from '../lib/utils';
+import { getInitials } from '../utils';
 
 import LikeIcon from '../assets/like-primary.svg';
 import LikedIcon from '../assets/liked.svg';
 import CommentIcon from '../assets/comment-primary.svg';
-import { formatDate, strapiRichTextToHtml } from '../lib/utils';
-import { getInitials } from '../utils';
 
 type PostDetails = {
   Category?: {
@@ -52,6 +54,7 @@ export const PostModal: React.FC<PostModalProps> = ({ isOpen, postId, onClose })
 
   const [loading, setLoading] = useState(false);
   const [isLikeLoading, setIsLikeLoading] = useState(false);
+  const [isAddCommentLoading, setIsAddCommentLoading] = useState(false);
 
   // Use ref to track if component is mounted
   const isMounted = useRef(false);
@@ -121,17 +124,26 @@ export const PostModal: React.FC<PostModalProps> = ({ isOpen, postId, onClose })
     const email = formData.get('email') as string;
 
     if (!comment || !name || !email) {
-      alert('All fields are required!');
+      toast.error('All fields are required!');
       return;
     }
 
+    if (!isValidEmail(email)) {
+      toast.error('Please enter a valid email address.');
+      return;
+    }
+
+    setIsAddCommentLoading(true);
     try {
       await addComment(postId, email, comment, name);
       fetchPostDetailsData(postId as string, true);
+      toast.success('Your comment has been added.');
       form.reset();
     } catch (error) {
       console.error('Error adding comment:', error);
-      alert('Failed to add comment.');
+      toast.error('Failed to add comment!');
+    } finally {
+      setIsAddCommentLoading(false);
     }
   };
 
@@ -167,7 +179,7 @@ export const PostModal: React.FC<PostModalProps> = ({ isOpen, postId, onClose })
     } else {
       return (
         <img
-          src={postDetails?.Images?.[0]?.url || ''}
+          src={postDetails?.Images?.[0]?.url}
           alt="post"
           className="aspect-square w-full overflow-hidden object-cover"
         />
@@ -309,9 +321,10 @@ export const PostModal: React.FC<PostModalProps> = ({ isOpen, postId, onClose })
           </div>
           <button
             type="submit"
+            disabled={isAddCommentLoading}
             className="w-[150px] self-start bg-gradient-to-r from-teal-500 to-teal-800 px-1 py-2 text-xs tracking-wider text-white hover:from-teal-800 hover:to-teal-500 hover:font-medium"
           >
-            SUBMIT
+            {isAddCommentLoading ? 'Submitting...' : ' SUBMIT'}
           </button>
         </form>
       );
@@ -324,34 +337,37 @@ export const PostModal: React.FC<PostModalProps> = ({ isOpen, postId, onClose })
     return null;
   }
   return (
-    <div
-      className="fixed inset-0 z-40 flex items-center justify-center px-3 pb-[50px] pt-[100px] opacity-100 transition-opacity duration-300 md:px-5"
-      id={`modal-${postId}`}
-    >
-      <div className="absolute inset-0 bg-black opacity-50" data-post-id={postId}></div>
+    <div>
+      <div
+        className="fixed inset-0 z-40 flex items-center justify-center px-3 pb-[50px] pt-[100px] opacity-100 transition-opacity duration-300 md:px-5"
+        id={`modal-${postId}`}
+      >
+        <div className="absolute inset-0 bg-black opacity-50" data-post-id={postId}></div>
 
-      <div className="overscroll-y-hidden relative z-10 h-full max-h-[80vh] w-full max-w-screen-2xl overflow-x-hidden border-[1px] border-primary bg-white p-3 shadow-lg md:p-5 md:pr-0">
-        <div className="flex h-full w-full gap-2">
-          <div className="relative flex aspect-square w-full max-w-[60%]">
-            {renderImageSection()}
-            {renderCloseButton()}
-          </div>
+        <div className="overscroll-y-hidden relative z-10 h-full max-h-[80vh] w-full max-w-screen-2xl overflow-x-hidden border-[1px] border-primary bg-white p-3 shadow-lg md:p-5 md:pr-0">
+          <div className="flex h-full w-full gap-2">
+            <div className="relative flex aspect-square w-full max-w-[60%]">
+              {renderImageSection()}
+              {renderCloseButton()}
+            </div>
 
-          <div className="w-full max-w-[40%] space-y-4 overflow-y-auto">
-            <div className="flex w-full flex-col gap-3 bg-white bg-opacity-5 px-5 pb-5">
-              {renderTitle()}
-              {renderDateAndCategorySection()}
-              {renderLikeAndCommentSection()}
-              {renderDescription()}
-              <div className="mt-5 w-full">
-                <h3 className="text-sm font-semibold text-black">Comments</h3>
-                {renderAddCommentForm()}
-                {renderComments()}
+            <div className="w-full max-w-[40%] space-y-4 overflow-y-auto">
+              <div className="flex w-full flex-col gap-3 bg-white bg-opacity-5 px-5 pb-5">
+                {renderTitle()}
+                {renderDateAndCategorySection()}
+                {renderLikeAndCommentSection()}
+                {renderDescription()}
+                <div className="mt-5 w-full">
+                  <h3 className="text-sm font-semibold text-black">Comments</h3>
+                  {renderAddCommentForm()}
+                  {renderComments()}
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
+      <Toaster />
     </div>
   );
 };

@@ -1,6 +1,8 @@
 ---
 import { HeroSectionData } from '../types/home';
 
+import { strapiRichTextToHtml } from '../lib/utils';
+
 export interface Props {
   data: HeroSectionData | null;
 }
@@ -18,7 +20,7 @@ const header = data?.MainHeading || '';
 const title = data?.SubTitle || '';
 const description = data?.ShortDescription || '';
 
-const longDescription = data?.LongDescription || '';
+const longDescription = data?.LongDescription;
 ---
 
 <section id="hero" class="flex w-full flex-col items-center justify-center px-5 pb-[80px]">
@@ -67,9 +69,10 @@ const longDescription = data?.LongDescription || '';
 
       <!-- Right section -->
       <div class="flex w-full max-w-[400px] flex-1 flex-col gap-5">
-        <p class="text-[1.1rem] text-white sm:text-base">
-          {longDescription}
-        </p>
+        <div
+          class="text-[1.1rem] text-white sm:text-base"
+          set:html={longDescription ? strapiRichTextToHtml(longDescription) : ''}
+        />
       </div>
     </div>
   </div>

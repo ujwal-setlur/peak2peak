@@ -35,7 +35,7 @@ const TabBarItem: React.FC<TabBarItemProps> = ({ tab, isActive = false, onClick 
           />
         </div>
         <div className="flex items-center gap-2">
-          <img src={tab?.icon?.url || ''} className="h-[25px]" />
+          <img src={tab?.icon?.url} className="h-[25px]" />
           <span
             className={`uppercase text-black duration-300 ${
               isActive ? 'font-medium' : 'font-thin group-hover:font-medium'
