@@ -7,16 +7,17 @@ import CommentIcon from '../assets/comment.svg';
 type PostCardProps = {
   data: {
     documentId?: string;
-    blog?: {
-      slug?: string;
+    Category?: {
+      Name?: string;
+      Slug?: string;
     };
-    thumbNail?: {
+    ThumbNail?: {
       url?: string;
     };
-    images?: {
+    Title?: string;
+    Images?: {
       url?: string;
     }[];
-    title?: string;
     likeCounts?: number;
     commentCount?: number;
   } | null;
@@ -31,14 +32,14 @@ const PostCard: React.FC<PostCardProps> = ({ data, onClick }) => {
       onClick={() => onClick && onClick(data?.documentId || '')}
     >
       <img
-        src={data?.thumbNail?.url || data?.images?.[0]?.url || undefined}
-        alt={data?.title || ''}
+        src={data?.ThumbNail?.url || data?.Images?.[0]?.url || undefined}
+        alt={data?.Title || ''}
         className="cover aspect-square w-full overflow-hidden duration-300 ease-in group-hover:scale-110 group-hover:transform"
       />
       <div className="absolute inset-0 flex items-end justify-start gap-[60px] px-4 py-3">
-        {data?.title && (
+        {data?.Title && (
           <span className="line-clamp-2 text-sm font-medium text-white sm:text-base lg:text-[1.65rem]">
-            {data?.title}
+            {data?.Title}
           </span>
         )}
       </div>

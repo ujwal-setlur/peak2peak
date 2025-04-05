@@ -39,7 +39,7 @@ const NavLinksData = [
   <nav class="flex h-full w-full max-w-screen-2xl items-center justify-between">
     <!-- Logo section -->
     <a href="/" target="_self">
-      <img src={logoSrc || ''} alt="PEAK2PEAK" class="h-[22px] sm:h-[28px]" />
+      <img src={logoSrc} alt="PEAK2PEAK" class="h-[22px] sm:h-[28px]" />
     </a>
 
     <div class="flex items-center gap-5">
@@ -62,10 +62,10 @@ const NavLinksData = [
       <!-- Social links section -->
       <div class="hidden items-center gap-5 lg:flex">
         {
-          socialData.map(({ name, url, icon }) => {
+          socialData?.map(({ Name, Url, Icon }) => {
             return (
-              <a href={url || ''} target="_blank" rel="noopener noreferrer" class="h-8 w-8">
-                <img src={icon?.url || ''} alt={name} class="h-full w-full" />
+              <a href={Url || ''} target="_blank" rel="noopener noreferrer" class="h-8 w-8">
+                <img src={Icon?.url} alt={Name} class="h-full w-full" />
               </a>
             );
           }) || null

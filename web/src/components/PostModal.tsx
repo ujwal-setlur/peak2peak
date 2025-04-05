@@ -8,35 +8,36 @@ import { formatDate, strapiRichTextToHtml } from '../lib/utils';
 import { getInitials } from '../utils';
 
 type PostDetails = {
-  blog?: {
+  Category?: {
     Name?: string;
-    slug?: string;
-    icon?: {
+    Slug?: string;
+    Icon?: {
       url?: string;
     };
   };
   createdAt?: string;
-  images?: {
+  Images?: {
     url?: string;
   }[];
-  video?: {
+  Video?: {
     url?: string;
   }[];
-  thumbNail?: {
+  ThumbNail?: {
     url?: string;
   };
-  title?: string;
+  Title?: string;
   documentId?: string;
-  comments: {
-    user?: string;
-    comment?: string;
+  Comments: {
+    documentId?: string;
     createdAt?: string;
-    email?: string;
+    Comment?: string;
+    User?: string;
+    Email?: string;
   }[];
-  description?: any;
+  Description?: any;
   likeCounts?: number;
   commentCount?: number;
-  allowComments?: boolean;
+  AllowComments?: boolean;
   isLiked?: boolean;
 };
 
@@ -62,7 +63,8 @@ export const PostModal: React.FC<PostModalProps> = ({ isOpen, postId, onClose })
     }
     try {
       const visitorId = (window as any).visitorId || '';
-      const data: any = await fetchPostDetails(postId, visitorId);
+      const sort = ['createdAt:desc'];
+      const data: any = await fetchPostDetails(postId, visitorId, sort);
 
       // Only update state if component is still mounted
       if (isMounted.current) {
@@ -128,7 +130,6 @@ export const PostModal: React.FC<PostModalProps> = ({ isOpen, postId, onClose })
       fetchPostDetailsData(postId as string, true);
       form.reset();
     } catch (error) {
-      console.log('error', error);
       console.error('Error adding comment:', error);
       alert('Failed to add comment.');
     }
@@ -155,7 +156,7 @@ export const PostModal: React.FC<PostModalProps> = ({ isOpen, postId, onClose })
   };
 
   const renderImageSection = () => {
-    const videoUrl = postDetails?.video?.[0]?.url;
+    const videoUrl = postDetails?.Video?.[0]?.url;
     if (videoUrl) {
       return (
         <video controls className="h-auto w-full">
@@ -166,7 +167,7 @@ export const PostModal: React.FC<PostModalProps> = ({ isOpen, postId, onClose })
     } else {
       return (
         <img
-          src={postDetails?.images?.[0]?.url || ''}
+          src={postDetails?.Images?.[0]?.url || ''}
           alt="post"
           className="aspect-square w-full overflow-hidden object-cover"
         />
@@ -177,7 +178,7 @@ export const PostModal: React.FC<PostModalProps> = ({ isOpen, postId, onClose })
   const renderTitle = () => {
     return (
       <div className="w-full text-lg font-semibold leading-tight text-primary">
-        {postDetails?.title || ''}
+        {postDetails?.Title || ''}
       </div>
     );
   };
@@ -187,7 +188,7 @@ export const PostModal: React.FC<PostModalProps> = ({ isOpen, postId, onClose })
       <div className="w-full text-base font-thin text-black">
         {postDetails?.createdAt ? formatDate(postDetails?.createdAt) : ''}
         <span className="mx-2 font-thin">|</span>
-        {postDetails?.blog?.Name || ''}
+        {postDetails?.Category?.Name || ''}
       </div>
     );
   };
@@ -235,74 +236,88 @@ export const PostModal: React.FC<PostModalProps> = ({ isOpen, postId, onClose })
       <div
         className="w-full text-sm font-thin text-black"
         dangerouslySetInnerHTML={{
-          __html: postDetails?.description ? strapiRichTextToHtml(postDetails?.description) : '',
+          __html: postDetails?.Description ? strapiRichTextToHtml(postDetails?.Description) : '',
         }}
       />
     );
   };
 
   const renderComments = () => {
-    return (
-      <ul className="mt-8 max-h-[500px] space-y-3 overflow-y-auto" id={`comments-${postId}`}>
-        {postDetails && postDetails?.comments && postDetails?.comments?.length
-          ? postDetails.comments.map((comment, index) => {
-              const isLastComment =
-                postDetails?.comments?.length && index === postDetails.comments.length - 1;
-              return (
-                <li
-                  key={index}
-                  className={`flex gap-3 ${!isLastComment ? 'border-b-[1px] pb-3' : ''}`}
-                >
-                  <div className="flex h-[50px] w-[50px] shrink-0 items-center justify-center rounded-full bg-primary text-sm font-medium text-white">
-                    {comment.user ? getInitials(comment.user) : ''}
-                  </div>
-                  <div className="flex flex-col">
-                    <span className="text-xs font-medium text-black">{comment.user}</span>
-                    <span className="text-xs font-thin text-black">{comment.comment}</span>
-                  </div>
-                </li>
-              );
-            })
-          : null}
-      </ul>
-    );
+    if (postDetails?.AllowComments) {
+      return (
+        <ul className="mt-8 space-y-3" id={`comments-${postId}`}>
+          {postDetails && postDetails?.Comments && postDetails?.Comments?.length
+            ? postDetails.Comments.map((comment, index) => {
+                const isLastComment =
+                  postDetails?.Comments?.length && index === postDetails.Comments.length - 1;
+                return (
+                  <li
+                    key={index}
+                    className={`flex gap-3 ${!isLastComment ? 'border-b-[1px] pb-3' : ''}`}
+                  >
+                    <div className="flex h-[50px] w-[50px] shrink-0 items-center justify-center rounded-full bg-primary text-sm font-medium text-white">
+                      {comment.User ? getInitials(comment.User) : ''}
+                    </div>
+                    <div className="flex flex-col">
+                      <span className="text-xs font-medium text-black">{comment.User}</span>
+                      <span className="text-xs font-thin text-black">{comment.Comment}</span>
+                    </div>
+                  </li>
+                );
+              })
+            : null}
+        </ul>
+      );
+    } else {
+      return (
+        <div className="mt-2">
+          <span className="text-[0.9rem] font-thin text-gray-500">
+            Comments are disabled for this post
+          </span>
+        </div>
+      );
+    }
   };
 
   const renderAddCommentForm = () => {
-    return (
-      <form
-        onSubmit={handleSubmit}
-        className="flex flex-col gap-3"
-        data-comment-form
-        data-post-id={postId}
-      >
-        <div className="mt-3 flex flex-col gap-2">
-          <textarea
-            name="comment"
-            placeholder="Write your comments..."
-            className="w-full border px-3 py-2 text-xs italic focus:outline-none focus:ring-2 focus:ring-primary"
-          ></textarea>
-          <input
-            type="text"
-            name="name"
-            placeholder="Your name"
-            className="w-full border px-3 py-2 text-xs italic focus:outline-none focus:ring-2 focus:ring-primary"
-          />
-          <input
-            type="text"
-            name="email"
-            placeholder="Email"
-            className="w-full border px-3 py-2 text-xs italic focus:outline-none focus:ring-2 focus:ring-primary"
-          />
-        </div>
-        <button
-          type="submit"
-          className="w-[150px] self-start bg-gradient-to-r from-teal-500 to-teal-800 px-1 py-2 text-xs tracking-wider text-white hover:from-teal-800 hover:to-teal-500 hover:font-medium"
+    if (postDetails?.AllowComments) {
+      return (
+        <form
+          onSubmit={handleSubmit}
+          className="flex flex-col gap-3"
+          data-comment-form
+          data-post-id={postId}
         >
-          SUBMIT
-        </button>
-      </form>
-    );
+          <div className="mt-3 flex flex-col gap-2">
+            <textarea
+              name="comment"
+              placeholder="Write your comments..."
+              className="w-full border px-3 py-2 text-xs italic focus:outline-none focus:ring-2 focus:ring-primary"
+            ></textarea>
+            <input
+              type="text"
+              name="name"
+              placeholder="Your name"
+              className="w-full border px-3 py-2 text-xs italic focus:outline-none focus:ring-2 focus:ring-primary"
+            />
+            <input
+              type="text"
+              name="email"
+              placeholder="Email"
+              className="w-full border px-3 py-2 text-xs italic focus:outline-none focus:ring-2 focus:ring-primary"
+            />
+          </div>
+          <button
+            type="submit"
+            className="w-[150px] self-start bg-gradient-to-r from-teal-500 to-teal-800 px-1 py-2 text-xs tracking-wider text-white hover:from-teal-800 hover:to-teal-500 hover:font-medium"
+          >
+            SUBMIT
+          </button>
+        </form>
+      );
+    } else {
+      return null;
+    }
   };
 
   if (!isOpen || loading) {

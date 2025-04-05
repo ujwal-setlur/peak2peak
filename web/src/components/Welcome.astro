@@ -7,18 +7,18 @@ export interface Props {
 
 const { data } = Astro.props;
 
-const logoSrc = data?.logo?.image?.url || '';
-const tagLine = data?.logo?.logText || '';
+const logoSrc = data?.LogoSection?.Logo?.url || '';
+const tagLine = data?.LogoSection?.TagLine || '';
 
 const profileName = data?.ProfileDetails?.Name || '';
 const profileTitle = data?.ProfileDetails?.ProfileTitle || '';
-const profileImageSrc = data?.ProfileDetails?.ProfilePIcture?.url || '';
+const profileImageSrc = data?.ProfileDetails?.ProfilePicture?.url || '';
 
-const header = data?.heading || '';
-const title = data?.title || '';
-const description = data?.description || '';
+const header = data?.MainHeading || '';
+const title = data?.SubTitle || '';
+const description = data?.ShortDescription || '';
 
-const longDescription = data?.longDescription || '';
+const longDescription = data?.LongDescription || '';
 ---
 
 <section id="hero" class="flex w-full flex-col items-center justify-center px-5 pb-[80px]">

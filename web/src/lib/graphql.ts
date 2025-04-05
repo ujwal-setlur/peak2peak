@@ -1,4 +1,5 @@
 import { GraphQLClient, gql } from 'graphql-request';
+import { ContactFormData } from '../types/common';
 
 const endpoint = (import.meta.env.PUBLIC_GRAPHQL_API_BASE_URL as string) || '';
 
@@ -14,18 +15,17 @@ export const fetchHeaderData = async () => {
   const query = gql`
     query Global {
       global {
-        header {
-          logo {
+        Header {
+          Logo {
             url
           }
-          social {
-            id
-            isExternal
-            text
-            url
-            icon {
+          Social {
+            Icon {
               url
             }
+            IsExternal
+            Url
+            Text
           }
         }
       }
@@ -44,32 +44,30 @@ export const fetchHomeData = async () => {
           url
         }
         HeroSection {
-          ... on ComponentBlocksHeroSection {
-            logo {
-              image {
-                url
-              }
-              logText
+          LogoSection {
+            Logo {
+              url
             }
-            ProfileDetails {
-              Name
-              ProfileTitle
-              ProfilePIcture {
-                url
-              }
+            TagLine
+          }
+          MainHeading
+          SubTitle
+          ShortDescription
+          LongDescription
+          ProfileDetails {
+            Name
+            ProfileTitle
+            ProfilePicture {
+              url
             }
-            heading
-            title
-            description
-            longDescription
           }
         }
-        blogs {
-          Name
-          icon {
+        Categories {
+          Icon {
             url
           }
-          slug
+          Name
+          Slug
           postCount
         }
       }
@@ -80,21 +78,22 @@ export const fetchHomeData = async () => {
 };
 
 // Fetch posts
-export const fetchPosts = async (filters: any, pagination: any, sort: any) => {
+export const fetchPosts = async (filters: any, pagination: any, sort?: string[]) => {
   const query = gql`
     query Posts($filters: PostFiltersInput, $pagination: PaginationArg, $sort: [String]) {
       posts(filters: $filters, pagination: $pagination, sort: $sort) {
         documentId
-        blog {
-          slug
+        Category {
+          Name
+          Slug
         }
-        thumbNail {
+        ThumbNail {
           url
         }
-        images {
+        Title
+        Images {
           url
         }
-        title
         likeCounts
         commentCount
       }
@@ -105,45 +104,46 @@ export const fetchPosts = async (filters: any, pagination: any, sort: any) => {
 };
 
 // Fetch post details
-export const fetchPostDetails = async (documentId: string, visitorId: string) => {
+export const fetchPostDetails = async (documentId: string, visitorId: string, sort?: string[]) => {
   const query = gql`
-    query Post($documentId: ID!, $visitorId: String!) {
+    query Post($documentId: ID!, $visitorId: String!, $sort: [String]) {
       post(documentId: $documentId) {
-        blog {
+        documentId
+        AllowComments
+        Category {
           Name
-          slug
-          icon {
+          Slug
+          Icon {
             url
           }
         }
-        createdAt
-        images {
-          url
-        }
-        video {
-          url
-        }
-        thumbNail {
-          url
-        }
-        title
-        documentId
-        comments {
-          comment
+        Comments(sort: $sort) {
+          documentId
           createdAt
-          email
-          user
+          Comment
+          User
+          Email
         }
-        description
-        allowComments
+        Description
+        Images {
+          url
+        }
+        ThumbNail {
+          url
+        }
+        Title
+        Video {
+          url
+        }
         commentCount
         likeCounts
+        createdAt
         isLiked(visitorId: $visitorId)
       }
     }
   `;
 
-  return client.request(query, { documentId, visitorId });
+  return client.request(query, { documentId, visitorId, sort });
 };
 
 // Fetch about page data
@@ -204,8 +204,9 @@ export const addComment = async (blog: string, email: string, comment: string, u
     mutation AddComment($blog: ID!, $email: String!, $comment: String!, $user: String!) {
       addComment(blog: $blog, email: $email, comment: $comment, user: $user) {
         id
-        comment
-        user
+        Comment
+        User
+        Email
       }
     }
   `;
@@ -214,7 +215,7 @@ export const addComment = async (blog: string, email: string, comment: string, u
 };
 
 // Mutation to submit contact us form
-export const createForm = async (data: any) => {
+export const submitContactForm = async (data: ContactFormData) => {
   const mutation = gql`
     mutation CreateForm($data: FormInput!) {
       createForm(data: $data) {

@@ -10,30 +10,34 @@ import { LoadMore } from './LoadMore';
 
 type PostItem = {
   documentId?: string;
-  blog?: {
-    slug?: string;
+  Category?: {
+    Name?: string;
+    Slug?: string;
   };
-  thumbNail?: {
+  ThumbNail?: {
     url?: string;
   };
-  title?: string;
+  Title?: string;
+  Images?: {
+    url?: string;
+  }[];
   likeCounts?: number;
   commentCount?: number;
 };
 
 interface PostsProps {
-  categories: {
+  Categories: {
     Name?: string;
-    icon?: {
+    Icon?: {
       url?: string;
     };
-    slug?: string;
+    Slug?: string;
     postCount?: number;
   }[];
 }
 
-export const Posts: React.FC<PostsProps> = ({ categories }) => {
-  const [activeTab, setActiveTab] = useState<string | undefined>(categories?.[0]?.slug || '');
+export const Posts: React.FC<PostsProps> = ({ Categories }) => {
+  const [activeTab, setActiveTab] = useState<string | undefined>(Categories?.[0]?.Slug || '');
   const [isDetailsModalOpen, setIsDetailsModalOpen] = useState<boolean>(false);
   const [selectedPostId, setSelectedPostId] = useState<string>('');
   const [posts, setPosts] = useState<PostItem[]>([]);
@@ -56,7 +60,7 @@ export const Posts: React.FC<PostsProps> = ({ categories }) => {
     }
     try {
       const data: any = await fetchPosts(
-        { blog: { slug: { eq: tabSlug || activeTab } } },
+        { Category: { Slug: { eq: tabSlug || activeTab } } },
         { page: tabSlug ? 1 : pageValue || page, pageSize: pageSize },
         ['createdAt:desc']
       );
@@ -119,8 +123,8 @@ export const Posts: React.FC<PostsProps> = ({ categories }) => {
   };
 
   const getActiveTabPostCount = () => {
-    if (activeTab && categories?.length) {
-      const activeTabData = categories.find((tab) => tab.slug === activeTab);
+    if (activeTab && Categories?.length) {
+      const activeTabData = Categories.find((tab) => tab.Slug === activeTab);
       return activeTabData?.postCount || 0;
     } else {
       return 0;
@@ -134,13 +138,13 @@ export const Posts: React.FC<PostsProps> = ({ categories }) => {
           {/* Tab Bar */}
           <div className="relative w-full">
             <div className="flex items-center overflow-x-auto">
-              {categories.map((tab) => {
+              {Categories?.map((tab) => {
                 if (tab?.postCount) {
                   return (
                     <TabBarItem
-                      key={tab.slug}
+                      key={tab.Slug}
                       tab={tab}
-                      isActive={activeTab === tab.slug}
+                      isActive={activeTab === tab.Slug}
                       onClick={handleTabClick}
                     />
                   );

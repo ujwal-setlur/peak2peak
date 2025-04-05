@@ -3,33 +3,33 @@
 // import { Image } from './common';
 
 export type CategoryItem = {
-  Name?: string;
-  icon?: {
+  Icon?: {
     url?: string;
   };
-  slug?: string;
+  Name?: string;
+  Slug?: string;
   postCount?: number;
 };
 
 export type ProfileDetails = {
   Name?: string;
   ProfileTitle?: string;
-  ProfilePIcture?: {
+  ProfilePicture?: {
     url?: string;
   };
 };
 
 export type HeroSectionData = {
-  logo?: {
-    image: {
+  LogoSection?: {
+    Logo?: {
       url?: string;
     };
-    logText?: string;
+    TagLine?: string;
   };
+  MainHeading?: string;
+  SubTitle?: string;
+  ShortDescription?: string;
+  LongDescription?: any;
   ProfileDetails?: ProfileDetails;
-  heading?: string;
-  title?: string;
-  description?: string;
-  longDescription?: string;
-  blogs?: CategoryItem[];
+  Categories?: CategoryItem[];
 };

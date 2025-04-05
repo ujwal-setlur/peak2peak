@@ -12,8 +12,8 @@ import { Posts } from '../components/Posts';
 
 type CategoryItem = {
   Name?: string;
-  icon?: Image;
-  slug?: string;
+  Icon?: Image;
+  Slug?: string;
   postCount?: number;
 };
 
@@ -24,8 +24,8 @@ let categories: CategoryItem[] | null = null;
 try {
   const data: any = await fetchHomeData();
   heroImage = data?.homePage?.Image;
-  heroSection = data?.homePage?.HeroSection?.[0];
-  categories = data?.homePage?.blogs;
+  heroSection = data?.homePage?.HeroSection;
+  categories = data?.homePage?.Categories;
 } catch (error) {
   console.error('Error fetching home data:', error);
   // } finally {
@@ -39,7 +39,7 @@ try {
       <div
         class="absolute inset-0 top-0 before:absolute before:inset-0 before:bg-black/30 before:content-['']"
         style={{
-          backgroundImage: `url(${heroImage?.url || ''})`,
+          backgroundImage: `url(${heroImage?.url})`,
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           backgroundRepeat: 'no-repeat',
@@ -48,7 +48,7 @@ try {
       >
       </div>
       <Welcome data={heroSection} />
-      <Posts client:load categories={categories || []} />
+      <Posts client:load Categories={categories || []} />
     </main>
   </div>
 </Layout>

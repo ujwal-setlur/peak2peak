@@ -14,8 +14,8 @@ let socialData = null;
 
 try {
   const data: any = await fetchHeaderData();
-  logo = data?.global?.header?.logo;
-  socialData = data?.global?.header?.social;
+  logo = data?.global?.Header?.Logo;
+  socialData = data?.global?.Header?.Social;
 } catch (error) {
   console.error('Error fetching header data:', error);
 } finally {
@@ -44,7 +44,7 @@ try {
         </div>
       ) : (
         <>
-          <Header logoSrc={logo?.url || ''} socialData={socialData || []} />
+          <Header logoSrc={logo?.url} socialData={socialData || []} />
           <slot />
           <Footer />
         </>
