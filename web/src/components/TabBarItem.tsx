@@ -3,10 +3,10 @@ import React from 'react';
 type TabBarItemProps = {
   tab: {
     Name?: string;
-    icon?: {
+    Icon?: {
       url?: string;
     };
-    slug?: string;
+    Slug?: string;
   } | null;
   isActive: boolean;
   onClick: (tabId: string) => void;
@@ -15,13 +15,13 @@ type TabBarItemProps = {
 const TabBarItem: React.FC<TabBarItemProps> = ({ tab, isActive = false, onClick }) => {
   const handleClick = (e: React.MouseEvent) => {
     e.preventDefault();
-    onClick(tab?.slug || '');
+    onClick(tab?.Slug || '');
   };
 
   return (
     <div className="flex min-w-[250px] shrink-0 select-none self-start">
       <a
-        key={tab?.slug}
+        key={tab?.Slug}
         onClick={handleClick}
         className={`group relative flex cursor-pointer flex-col items-center gap-[30px] self-start`}
       >
@@ -35,7 +35,7 @@ const TabBarItem: React.FC<TabBarItemProps> = ({ tab, isActive = false, onClick 
           />
         </div>
         <div className="flex items-center gap-2">
-          <img src={tab?.icon?.url} className="h-[25px]" />
+          <img src={tab?.Icon?.url} className="h-[25px]" />
           <span
             className={`uppercase text-black duration-300 ${
               isActive ? 'font-medium' : 'font-thin group-hover:font-medium'
