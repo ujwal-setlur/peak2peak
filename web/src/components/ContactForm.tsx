@@ -1,8 +1,13 @@
 import React, { useState } from 'react';
+import { send } from '@emailjs/browser';
 import toast, { Toaster } from 'react-hot-toast';
 
 import { submitContactForm } from '../lib/graphql';
 import { isValidEmail, isValidPhone } from '../lib/utils';
+
+const PUBLIC_KEY = (import.meta.env.PUBLIC_EMAIL_KEY as string) || '';
+const SERVICE_ID = (import.meta.env.PUBLIC_EMAIL_SERVICE_ID as string) || '';
+const TEMPLATE_ID = (import.meta.env.PUBLIC_EMAIL_TEMPLATE_ID as string) || '';
 
 export const ContactForm: React.FC = () => {
   const [loading, setLoading] = useState(false);
@@ -44,10 +49,21 @@ export const ContactForm: React.FC = () => {
     setLoading(true);
     try {
       await submitContactForm(formattedFormData);
+      await send(
+        SERVICE_ID,
+        TEMPLATE_ID,
+        {
+          from_name: name,
+          from_email: email,
+          phone: phone,
+          message: message,
+        },
+        PUBLIC_KEY
+      );
       toast.success('Your message has been sent!');
       form.reset();
     } catch (error) {
-      console.error('Error adding comment:', error);
+      console.error('Error submitting contact form:', error);
       toast.error('Failed to send message!');
     } finally {
       setLoading(false);
