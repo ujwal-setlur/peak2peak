@@ -41,9 +41,6 @@
       "target": "api::like.like",
       "mappedBy": "post"
     },
-    "ExternalLink": {
-      "type": "string"
-    },
     "ThumbNail": {
       "type": "media",
       "multiple": false,

@@ -9,7 +9,6 @@ export interface BlocksHeroSection extends Struct.ComponentSchema {
   attributes: {
     LogoSection: Schema.Attribute.Component<'elements.logo', false>;
     LongDescription: Schema.Attribute.Blocks;
-    MainHeading: Schema.Attribute.String;
     ProfileDetails: Schema.Attribute.Component<'profile-info.profile', false>;
     ShortDescription: Schema.Attribute.Text &
       Schema.Attribute.SetMinMaxLength<{
@@ -17,6 +16,7 @@ export interface BlocksHeroSection extends Struct.ComponentSchema {
         minLength: 50;
       }>;
     SubTitle: Schema.Attribute.String;
+    Title: Schema.Attribute.String;
   };
 }
 
@@ -67,7 +67,6 @@ export interface SocialSocialLinks extends Struct.ComponentSchema {
   };
   attributes: {
     Icon: Schema.Attribute.Media<'images'>;
-    IsExternal: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
     Text: Schema.Attribute.String;
     Url: Schema.Attribute.String;
   };

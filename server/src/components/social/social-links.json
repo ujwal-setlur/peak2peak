@@ -12,10 +12,6 @@
     "Url": {
       "type": "string"
     },
-    "IsExternal": {
-      "type": "boolean",
-      "default": false
-    },
     "Icon": {
       "type": "media",
       "multiple": false,
