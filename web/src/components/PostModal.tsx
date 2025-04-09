@@ -5,9 +5,8 @@ import { addComment, fetchPostDetails, toggleLike } from '../lib/graphql';
 import { formatDate, isValidEmail, strapiRichTextToHtml } from '../lib/utils';
 import { getInitials } from '../utils';
 
-import LikeIcon from '../assets/like-primary.svg';
-import LikedIcon from '../assets/liked.svg';
-import CommentIcon from '../assets/comment-primary.svg';
+import LikeIcon from '../assets/like.svg?react';
+import CommentIcon from '../assets/comment.svg?react';
 
 type PostDetails = {
   Category?: {
@@ -216,10 +215,8 @@ export const PostModal: React.FC<PostModalProps> = ({ isOpen, postId, onClose })
             disabled={isLikeLoading}
             onClick={handleClickLike}
           >
-            <img
-              src={postDetails?.isLiked ? LikedIcon.src : LikeIcon.src}
-              alt="like"
-              className="h-8 w-8 fill-primary"
+            <LikeIcon
+              className={`h-8 w-8 ${postDetails?.isLiked ? 'fill-[#F44336]' : 'fill-primary'}`}
             />
           </button>
           <span className="text-md font-medium text-black" id={`likes-${postId}`}>
@@ -233,7 +230,7 @@ export const PostModal: React.FC<PostModalProps> = ({ isOpen, postId, onClose })
             data-action="like"
             data-post-id={postId}
           >
-            <img src={CommentIcon.src} alt="comment" className="h-8 w-8 fill-primary" />
+            <CommentIcon className="h-8 w-8 fill-primary" />
           </button>
           <span className="text-md font-medium text-black" id={`comments-count-${postId}`}>
             {postDetails?.commentCount || 0}
