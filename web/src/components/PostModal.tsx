@@ -189,7 +189,7 @@ export const PostModal: React.FC<PostModalProps> = ({ isOpen, postId, onClose })
 
   const renderTitle = () => {
     return (
-      <div className="w-full text-lg font-semibold leading-tight text-primary">
+      <div className="w-full text-md font-semibold leading-tight text-primary sm:text-lg">
         {postDetails?.Title || ''}
       </div>
     );
@@ -344,15 +344,15 @@ export const PostModal: React.FC<PostModalProps> = ({ isOpen, postId, onClose })
       >
         <div className="absolute inset-0 bg-black opacity-50" data-post-id={postId}></div>
 
-        <div className="overscroll-y-hidden relative z-10 h-full max-h-[80vh] w-full max-w-screen-2xl overflow-x-hidden border-[1px] border-primary bg-white p-3 shadow-lg md:p-5 md:pr-0">
-          <div className="flex h-full w-full gap-2">
-            <div className="relative flex aspect-square w-full max-w-[60%]">
+        <div className="overscroll-y-hidden relative z-10 h-full max-h-[85vh] w-full max-w-screen-2xl overflow-x-hidden border-[1px] border-primary bg-white p-4 shadow-lg sm:max-h-[80vh] md:p-5 md:pr-0">
+          <div className="flex h-full w-full flex-col gap-5 sm:flex-row sm:gap-2">
+            <div className="max-w-auto relative flex aspect-square w-full sm:max-w-[60%]">
               {renderImageSection()}
               {renderCloseButton()}
             </div>
 
-            <div className="w-full max-w-[40%] space-y-4 overflow-y-auto">
-              <div className="flex w-full flex-col gap-3 bg-white bg-opacity-5 px-5 pb-5">
+            <div className="max-w-auto w-full space-y-4 sm:max-w-[40%]">
+              <div className="flex w-full flex-col gap-3 bg-white bg-opacity-5 px-0 pb-5 sm:px-5">
                 {renderTitle()}
                 {renderDateAndCategorySection()}
                 {renderLikeAndCommentSection()}
