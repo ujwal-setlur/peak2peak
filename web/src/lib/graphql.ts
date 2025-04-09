@@ -29,7 +29,6 @@ export const fetchHeaderData = async () => {
             Icon {
               url
             }
-            IsExternal
             Url
             Text
           }
@@ -56,7 +55,7 @@ export const fetchHomeData = async () => {
             }
             TagLine
           }
-          MainHeading
+          Title
           SubTitle
           ShortDescription
           LongDescription

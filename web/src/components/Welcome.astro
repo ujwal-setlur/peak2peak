@@ -16,8 +16,8 @@ const profileName = data?.ProfileDetails?.Name || '';
 const profileTitle = data?.ProfileDetails?.ProfileTitle || '';
 const profileImageSrc = data?.ProfileDetails?.ProfilePicture?.url || '';
 
-const header = data?.MainHeading || '';
-const title = data?.SubTitle || '';
+const title = data?.Title || '';
+const subTitle = data?.SubTitle || '';
 const description = data?.ShortDescription || '';
 
 const longDescription = data?.LongDescription;
@@ -57,10 +57,10 @@ const longDescription = data?.LongDescription;
       <!-- Middle section -->
       <div class="flex flex-1 flex-col gap-5">
         <div class="flex flex-col">
-          <h1 class="text-[2.5rem] text-primary sm:text-[3rem]">{header}</h1>
+          <h1 class="text-[2.5rem] text-primary sm:text-[3rem]">{title}</h1>
         </div>
         <h6 class="w-full max-w-[250px] text-[1.5rem] font-thin text-secondary sm:text-[1.75rem]">
-          {title}
+          {subTitle}
         </h6>
         <span class="w-full max-w-[400px] text-[1.15rem] font-medium text-white sm:text-base">
           {description}
