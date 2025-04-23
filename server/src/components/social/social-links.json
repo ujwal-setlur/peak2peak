@@ -1,19 +1,28 @@
 {
   "collectionName": "components_social_social_links",
   "info": {
-    "displayName": "Social Links"
+    "displayName": "Social Links",
+    "description": ""
   },
   "options": {},
   "attributes": {
-    "text": {
+    "Text": {
       "type": "string"
     },
-    "url": {
+    "Url": {
       "type": "string"
     },
-    "isExternal": {
+    "IsExternal": {
       "type": "boolean",
       "default": false
+    },
+    "Icon": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images"
+      ]
     }
   }
 }

@@ -1,19 +1,21 @@
 {
   "collectionName": "components_elements_logos",
   "info": {
-    "displayName": "Logo"
+    "displayName": "Logo",
+    "description": ""
   },
   "options": {},
   "attributes": {
-    "logText": {
+    "TagLine": {
       "type": "string"
     },
-    "image": {
+    "Logo": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
       "allowedTypes": [
         "images"
-      ],
-      "type": "media",
-      "multiple": false
+      ]
     }
   }
 }

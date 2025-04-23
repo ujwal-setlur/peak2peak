@@ -2,9 +2,30 @@
 import Layout from '../layouts/Layout.astro';
 
 import Welcome from '../components/Welcome.astro';
-import Posts from '../components/Posts.astro';
+import { fetchHomeData } from '../lib/graphql';
+import { Image } from '../types/common';
+import { HeroSectionData } from '../types/home';
+import { Posts } from '../components/Posts';
 
-import heroImage from '../assets/homeBg.png';
+type CategoryItem = {
+  Name?: string;
+  Icon?: Image;
+  Slug?: string;
+  postCount?: number;
+};
+
+let heroImage: Image | null = null;
+let heroSection: HeroSectionData | null = null;
+let categories: CategoryItem[] | null = null;
+
+try {
+  const data: any = await fetchHomeData();
+  heroImage = data?.homePage?.Image;
+  heroSection = data?.homePage?.HeroSection;
+  categories = data?.homePage?.Categories;
+} catch (error) {
+  console.error('Error fetching home data:', error);
+}
 ---
 
 <Layout>
@@ -13,7 +34,7 @@ import heroImage from '../assets/homeBg.png';
       <div
         class="absolute inset-0 top-0 before:absolute before:inset-0 before:bg-black/30 before:content-['']"
         style={{
-          backgroundImage: `url(${heroImage.src})`,
+          backgroundImage: `url(${heroImage?.url})`,
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           backgroundRepeat: 'no-repeat',
@@ -21,8 +42,8 @@ import heroImage from '../assets/homeBg.png';
         }}
       >
       </div>
-      <Welcome />
-      <Posts />
+      <Welcome data={heroSection} />
+      <Posts client:load Categories={categories || []} />
     </main>
   </div>
 </Layout>

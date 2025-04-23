@@ -3,6 +3,24 @@ import Footer from '../components/Footer.astro';
 import Header from '../components/Header.astro';
 
 import '../styles/global.css';
+
+import { fetchHeaderData } from '../lib/graphql';
+
+// Initialize loading state
+let isLoading = true;
+
+let logo = null;
+let socialData = null;
+
+try {
+  const data: any = await fetchHeaderData();
+  logo = data?.global?.Header?.Logo;
+  socialData = data?.global?.Header?.Social;
+} catch (error) {
+  console.error('Error fetching header data:', error);
+} finally {
+  isLoading = false;
+}
 ---
 
 <!doctype html>
@@ -19,9 +37,20 @@ import '../styles/global.css';
     />
   </head>
   <body>
-    <Header />
-    <slot />
-    <Footer />
+    {
+      isLoading ? (
+        <div class="flex h-20 items-center justify-center">
+          <p>Loading...</p>
+        </div>
+      ) : (
+        <>
+          <Header logoSrc={logo?.url} socialData={socialData || []} />
+          <slot />
+          <Footer />
+        </>
+      )
+    }
+    <script type="module" src="/src/scripts/setVisitorId.js"></script>
   </body>
 </html>
 
