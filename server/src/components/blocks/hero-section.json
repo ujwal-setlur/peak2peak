@@ -1,0 +1,32 @@
+{
+  "collectionName": "components_blocks_hero_sections",
+  "info": {
+    "displayName": "Hero Section",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "logo": {
+      "type": "component",
+      "repeatable": false,
+      "component": "elements.logo"
+    },
+    "heading": {
+      "type": "string"
+    },
+    "title": {
+      "type": "text"
+    },
+    "description": {
+      "type": "text"
+    },
+    "ProfileDetails": {
+      "type": "component",
+      "repeatable": false,
+      "component": "profile-info.profile"
+    },
+    "longDescription": {
+      "type": "richtext"
+    }
+  }
+}

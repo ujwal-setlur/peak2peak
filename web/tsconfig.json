@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    "target": "ESNext", // Supports modern ESM (sourceType: 'module')
+    "module": "ESNext", // Supports modern ESM (sourceType: 'module')
+    "jsx": "preserve", // Preserves JSX for Astro/React processing
+    "strict": true, // Enforces strict type checking (recommended for TS)
+    "esModuleInterop": true, // Ensures compatibility with ESM/CJS imports
+    "skipLibCheck": true, // Speeds up linting/compilation by skipping library checks
+    "forceConsistentCasingInFileNames": true, // Prevents case-sensitivity issues
+    "moduleResolution": "node", // Matches Node.js module resolution for ESM
+    "allowJs": true, // Allows linting/compiling JS files alongside TS
+    "noEmit": true // Prevents TypeScript from emitting files (Astro handles this)
+  },
+  "extends": "astro/tsconfigs/strict",
+  "include": [".astro/config.d.ts", ".astro/types.d.ts", "**/*"],
+  "exclude": [
+    "node_modules/**",
+    "dist/**",
+    ".astro/**" // Matches ESLint's ignores
+  ]
+}

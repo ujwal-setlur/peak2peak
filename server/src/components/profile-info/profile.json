@@ -1,0 +1,25 @@
+{
+  "collectionName": "components_profile_info_profiles",
+  "info": {
+    "displayName": "profile"
+  },
+  "options": {},
+  "attributes": {
+    "Name": {
+      "type": "string"
+    },
+    "ProfileTitle": {
+      "type": "string"
+    },
+    "ProfilePIcture": {
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ],
+      "type": "media",
+      "multiple": false
+    }
+  }
+}

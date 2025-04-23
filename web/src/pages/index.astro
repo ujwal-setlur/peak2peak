@@ -1,0 +1,28 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+import Welcome from '../components/Welcome.astro';
+import Posts from '../components/Posts.astro';
+
+import heroImage from '../assets/homeBg.png';
+---
+
+<Layout>
+  <div id="container" class="relative flex w-full justify-center">
+    <main class="w-full">
+      <div
+        class="absolute inset-0 top-0 before:absolute before:inset-0 before:bg-black/30 before:content-['']"
+        style={{
+          backgroundImage: `url(${heroImage.src})`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundRepeat: 'no-repeat',
+          backgroundAttachment: 'fixed',
+        }}
+      >
+      </div>
+      <Welcome />
+      <Posts />
+    </main>
+  </div>
+</Layout>

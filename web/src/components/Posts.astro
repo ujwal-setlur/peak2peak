@@ -1,0 +1,72 @@
+---
+import PastIcon from '../assets/past.svg';
+
+import TabBar from './TabBar.jsx';
+import TabBarItem from './TabBarItem';
+import PostCard from './PostCard';
+
+import PostsData from './posts.json';
+import PostModal from './PostModal.astro';
+---
+
+<section class="flex w-full flex-col overflow-auto">
+  <div
+    class="z-10 flex w-full flex-col items-center justify-center bg-white/70 px-5 backdrop-blur-sm"
+  >
+    <div class="flex w-full max-w-screen-2xl flex-col gap-5">
+      <!-- TabBar section -->
+      <TabBar client:load initialActiveTab="past-trips" />
+
+      <!-- Posts section -->
+      <div class="grid grid-cols-2 gap-5 py-10 md:grid-cols-3 md:gap-10">
+        {PostsData.map((post) => <PostCard client:load data={post} onClick={() => {}} />)}
+      </div>
+    </div>
+
+    <!-- Load more section -->
+    <div class="flex items-center justify-center pb-12">
+      <TabBarItem
+        client:load
+        tab={{
+          id: 'past-trips',
+          label: 'LOAD MORE',
+          href: '',
+          icon: PastIcon,
+        }}
+      />
+    </div>
+  </div>
+</section>
+
+<!-- Modal Instances (one per post) -->
+{PostsData.map((post) => <PostModal postId={post.id} data={post} />)}
+
+<!-- Client-Side Script to Open Modal -->
+<script is:inline>
+  let scrollY = 0;
+
+  document.addEventListener('click', (e) => {
+    const postCard = e.target.closest('.post-card');
+    if (postCard) {
+      const postId = postCard.dataset.postId;
+      if (postId) {
+        const modal = document.getElementById(`modal-${postId}`);
+        if (modal) {
+          // Save current scroll position
+          scrollY = window.scrollY;
+
+          // Prevent background scroll without losing position
+          document.body.style.position = 'fixed';
+          document.body.style.top = `-${scrollY}px`;
+          document.body.style.width = '100%';
+
+          modal.classList.remove('opacity-0', 'invisible');
+          modal.classList.add('opacity-100', 'visible');
+
+          // Prevent background scrolling without flickering
+          document.body.classList.add('modal-open');
+        }
+      }
+    }
+  });
+</script>
