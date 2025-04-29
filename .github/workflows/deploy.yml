@@ -17,7 +17,7 @@ permissions:
 jobs:
   build:
     env:
-      PUBLIC_GRAPHQL_API_BASE_URL: ${{ secrets.PUBLIC_GRAPHQL_API_BASE_URL }}
+      PUBLIC_GRAPHQL_API_BASE_URL: https://steadfast-advice-fa34b24fc0.strapiapp.com/graphql
     runs-on: ubuntu-latest
     steps:
       - name: Checkout your repository using git
