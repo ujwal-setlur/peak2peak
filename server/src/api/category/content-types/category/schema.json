@@ -4,7 +4,7 @@
   "info": {
     "singularName": "category",
     "pluralName": "categories",
-    "displayName": "Blogs ",
+    "displayName": "Category",
     "description": ""
   },
   "options": {
@@ -14,10 +14,10 @@
     "Name": {
       "type": "string"
     },
-    "slug": {
+    "Slug": {
       "type": "string"
     },
-    "icon": {
+    "Icon": {
       "type": "media",
       "multiple": false,
       "required": false,

@@ -21,12 +21,11 @@
       ]
     },
     "HeroSection": {
-      "type": "dynamiczone",
-      "components": [
-        "blocks.hero-section"
-      ]
+      "type": "component",
+      "repeatable": false,
+      "component": "blocks.hero-section"
     },
-    "categories": {
+    "Categories": {
       "type": "relation",
       "relation": "oneToMany",
       "target": "api::category.category"

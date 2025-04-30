@@ -8,5 +8,10 @@ export default defineConfig({
       allowedHosts: [],
     },
   },
-  integrations: [react(), tailwind()],
+  integrations: [
+    react({
+      include: ['**/react/*'],
+    }),
+    tailwind(),
+  ],
 });

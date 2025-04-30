@@ -1,10 +1,120 @@
 ---
 import Layout from '../layouts/Layout.astro';
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+import contactImage from '../assets/bg.png';
+
+import { fetchContactPageData } from '../lib/graphql';
+import { ContactForm } from '../components/ContactForm';
+
+type Media = {
+  url?: string;
+};
+
+let heroImage: Media | null = null;
+let heroVideo: Media | null = null;
+let heading: string | null = null;
+
+try {
+  const data: any = await fetchContactPageData();
+  heroImage = data?.contact?.HeroImage;
+  heroVideo = data?.contact?.HeroVideo;
+  heading = data?.contact?.Heading;
+} catch (error) {
+  console.error('Error fetching contact page data:', error);
+}
 ---
 
 <Layout>
-  <h1>Contact</h1>
+  <div id="container" class="relative flex w-full justify-center">
+    <main class="flex w-full flex-col items-center">
+      <!-- Hero Image Section -->
+      <div class="relative flex w-full justify-center bg-cover bg-center bg-no-repeat">
+        {
+          heroVideo?.url ? (
+            <video
+              src={heroVideo.url}
+              autoplay
+              loop={false}
+              muted
+              playsinline
+              class="h-[60vh] w-full object-cover"
+            />
+          ) : (
+            <img
+              src={heroImage?.url}
+              alt="Peak2Peak"
+              class="h-[60vh] w-full bg-cover bg-center bg-no-repeat"
+            />
+          )
+        }
+        <div class="absolute bottom-0 flex w-full max-w-screen-2xl flex-col pb-8">
+          <h1 class="text-[3rem] font-bold uppercase text-white md:text-[4.25rem] md:font-black">
+            {heading || 'Contact'}
+          </h1>
+        </div>
+      </div>
+
+      <div class="flex w-full max-w-screen-2xl flex-col pb-0 md:pb-10">
+        <div class="mt-10 flex w-full flex-col gap-10 md:flex-row">
+          <!-- Contact Description And Form Section -->
+          <div class="max-w-auto flex w-full flex-col gap-3 md:max-w-[50%] lg:max-w-[70%]">
+            <div class="flex flex-col gap-3">
+              <h1 class="text-primary">
+                <span class="text-[2.5rem] font-thin">Get in</span>
+                <span class="text-[2.5rem] font-bold">Touch</span>
+              </h1>
+              <p class="mt-2 text-sm font-thin leading-loose text-gray-600">
+                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
+                Ipsum has been the industry’s standard dummy text ever since the 1500s, when an
+                unknown printer took a galley of type and scrambled it to make a type specimen book.
+                It has survived not only five centuries,
+              </p>
+            </div>
+
+            <div class="mt-3 flex flex-col gap-1">
+              <h1 class="text-primary">
+                <span class="text-[2.5rem] font-thin">Let's get in</span>
+                <span class="text-[2.5rem] font-bold">Touch</span>
+              </h1>
+              <p class="text-sm font-thin leading-loose text-gray-600">
+                Your email address will not be published. Required fields are marked *
+              </p>
+            </div>
+
+            <!-- Contact Form Section -->
+            <ContactForm client:load />
+          </div>
+
+          <!-- Contact Info Section -->
+          <div class="max-w-auto mt-3 flex w-full flex-col md:max-w-[50%] lg:max-w-[30%]">
+            <div class="flex w-full flex-col gap-5 bg-primary px-5 py-5 pb-10 md:px-10">
+              <h1 class="text-white">
+                <span class="text-[2.5rem] font-thin">Contact</span>
+                <span class="text-[2.5rem] font-bold">Info</span>
+              </h1>
+              <div class="flex flex-col">
+                <span class="text-sm font-medium text-white">Address</span>
+                <span class="text-sm font-thin text-white"
+                  >254, North City, Bulex Center, New York</span
+                >
+              </div>
+              <div class="flex flex-col">
+                <span class="text-sm font-medium text-white">Phone</span>
+                <span class="text-sm font-thin text-white"
+                  >09 (354) 587 874 or 10 (698) 852 741</span
+                >
+              </div>
+              <div class="flex flex-col">
+                <span class="text-sm font-medium text-white">Email</span>
+                <span class="text-sm font-thin text-white">info@example.com</span>
+              </div>
+            </div>
+            <div class="flex aspect-square w-full">
+              <img src={contactImage.src} alt="image" class="" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
 </Layout>

@@ -7,35 +7,28 @@ export interface BlocksHeroSection extends Struct.ComponentSchema {
     displayName: 'Hero Section';
   };
   attributes: {
-    description: Schema.Attribute.Text;
-    heading: Schema.Attribute.String;
-    logo: Schema.Attribute.Component<'elements.logo', false>;
-    longDescription: Schema.Attribute.RichText;
+    LogoSection: Schema.Attribute.Component<'elements.logo', false>;
+    LongDescription: Schema.Attribute.Blocks;
+    MainHeading: Schema.Attribute.String;
     ProfileDetails: Schema.Attribute.Component<'profile-info.profile', false>;
-    title: Schema.Attribute.Text;
-  };
-}
-
-export interface ElementsLink extends Struct.ComponentSchema {
-  collectionName: 'components_elements_links';
-  info: {
-    description: '';
-    displayName: 'Link';
-  };
-  attributes: {
-    isExternal: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
-    text: Schema.Attribute.String;
+    ShortDescription: Schema.Attribute.Text &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 180;
+        minLength: 50;
+      }>;
+    SubTitle: Schema.Attribute.String;
   };
 }
 
 export interface ElementsLogo extends Struct.ComponentSchema {
   collectionName: 'components_elements_logos';
   info: {
+    description: '';
     displayName: 'Logo';
   };
   attributes: {
-    image: Schema.Attribute.Media<'images'>;
-    logText: Schema.Attribute.String;
+    Logo: Schema.Attribute.Media<'images'>;
+    TagLine: Schema.Attribute.String;
   };
 }
 
@@ -46,19 +39,20 @@ export interface LayoutHeader extends Struct.ComponentSchema {
     displayName: 'Header';
   };
   attributes: {
-    logo: Schema.Attribute.Media<'images'>;
-    social: Schema.Attribute.Component<'social.social-links', true>;
+    Logo: Schema.Attribute.Media<'images'>;
+    Social: Schema.Attribute.Component<'social.social-links', true>;
   };
 }
 
 export interface ProfileInfoProfile extends Struct.ComponentSchema {
   collectionName: 'components_profile_info_profiles';
   info: {
+    description: '';
     displayName: 'profile';
   };
   attributes: {
     Name: Schema.Attribute.String;
-    ProfilePIcture: Schema.Attribute.Media<
+    ProfilePicture: Schema.Attribute.Media<
       'images' | 'files' | 'videos' | 'audios'
     >;
     ProfileTitle: Schema.Attribute.String;
@@ -68,12 +62,14 @@ export interface ProfileInfoProfile extends Struct.ComponentSchema {
 export interface SocialSocialLinks extends Struct.ComponentSchema {
   collectionName: 'components_social_social_links';
   info: {
+    description: '';
     displayName: 'Social Links';
   };
   attributes: {
-    isExternal: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
-    text: Schema.Attribute.String;
-    url: Schema.Attribute.String;
+    Icon: Schema.Attribute.Media<'images'>;
+    IsExternal: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
+    Text: Schema.Attribute.String;
+    Url: Schema.Attribute.String;
   };
 }
 
@@ -81,7 +77,6 @@ declare module '@strapi/strapi' {
   export module Public {
     export interface ComponentSchemas {
       'blocks.hero-section': BlocksHeroSection;
-      'elements.link': ElementsLink;
       'elements.logo': ElementsLogo;
       'layout.header': LayoutHeader;
       'profile-info.profile': ProfileInfoProfile;
