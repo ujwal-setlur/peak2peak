@@ -26,7 +26,7 @@ export type HeroSectionData = {
     };
     TagLine?: string;
   };
-  MainHeading?: string;
+  Title?: string;
   SubTitle?: string;
   ShortDescription?: string;
   LongDescription?: any;

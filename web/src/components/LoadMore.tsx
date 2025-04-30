@@ -1,6 +1,6 @@
 import React from 'react';
 
-import LoadMoreIcon from '../assets/past.svg';
+import LoadMoreIcon from '../assets/past.svg?react';
 
 type LoadMoreProps = {
   onClick: () => void;
@@ -24,7 +24,7 @@ export const LoadMore: React.FC<LoadMoreProps> = ({ onClick }) => {
           />
         </div>
         <div className="flex items-center gap-2">
-          <img src={LoadMoreIcon.src} className="h-[25px]" />
+          <LoadMoreIcon className="h-[25px]" />
           <span className={`font-thin uppercase text-black duration-300 group-hover:font-medium`}>
             LOAD MORE
           </span>

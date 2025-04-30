@@ -3,10 +3,8 @@ import TabBarItem from './TabBarItem';
 import PostCard from './PostCard';
 import { fetchPosts } from '../lib/graphql';
 import { PostModal } from './PostModal';
-import Peak2PeakLogo from '../assets/peak2peak.svg';
+import Peak2PeakLogo from '../assets/peak2peak.svg?react';
 import { LoadMore } from './LoadMore';
-// import { CategoryItem } from "../types/home";
-// import { PostItem } from "../types/posts";
 
 type PostItem = {
   documentId?: string;
@@ -161,7 +159,7 @@ export const Posts: React.FC<PostsProps> = ({ Categories }) => {
                     key={index}
                     className="flex aspect-square h-full w-full animate-pulse items-center justify-center overflow-hidden bg-gray-300 p-12"
                   >
-                    <img src={Peak2PeakLogo.src} alt="like" className="opacity-80" />
+                    <Peak2PeakLogo className="opacity-80" />
                   </div>
                 ))}
               </>

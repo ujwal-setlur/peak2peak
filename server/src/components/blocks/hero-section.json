@@ -16,7 +16,7 @@
       "repeatable": false,
       "component": "profile-info.profile"
     },
-    "MainHeading": {
+    "Title": {
       "type": "string"
     },
     "SubTitle": {
