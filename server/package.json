@@ -1,8 +1,8 @@
 {
-  "name": "peak-2-peak",
+  "name": "peak2peak",
   "version": "0.1.0",
   "private": true,
-  "description": "A Strapi application",
+  "description": "Strapi backend for Peak2Peak site",
   "scripts": {
     "build": "strapi build",
     "console": "strapi console",
@@ -15,12 +15,12 @@
     "upgrade:dry": "npx @strapi/upgrade latest --dry"
   },
   "dependencies": {
-    "@strapi/plugin-cloud": "5.11.2",
-    "@strapi/plugin-graphql": "^5.11.3",
-    "@strapi/plugin-users-permissions": "5.11.2",
-    "@strapi/provider-upload-cloudinary": "^5.12.0",
-    "@strapi/strapi": "5.11.2",
-    "better-sqlite3": "11.3.0",
+    "@strapi/plugin-cloud": "5.12.6",
+    "@strapi/plugin-graphql": "5.12.6",
+    "@strapi/plugin-users-permissions": "5.12.6",
+    "@strapi/provider-upload-cloudinary": "5.12.6",
+    "@strapi/strapi": "5.12.6",
+    "better-sqlite3": "11.9.1",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
     "react-router-dom": "^6.0.0",
@@ -38,5 +38,6 @@
   },
   "strapi": {
     "uuid": "c8326433-adf7-4913-8354-d742ef8d9fdf"
-  }
+  },
+  "packageManager": "yarn@1.22.22+sha512.a6b2f7906b721bba3d67d4aff083df04dad64c399707841b7acf00f6b133b7ac24255f2652fa22ae3534329dc6180534e98d17432037ff6fd140556e2bb3137e"
 }
