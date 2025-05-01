@@ -7,14 +7,12 @@ import netlify from '@astrojs/netlify';
 
 export default defineConfig({
   site: 'https://peak2peak.life',
-
   vite: {
     plugins: [svgr()],
     server: {
       allowedHosts: [],
     },
   },
-
   integrations: [
     react({
       include: ['**/react/*'],
@@ -22,4 +20,5 @@ export default defineConfig({
     tailwind(),
   ],
   adapter: netlify(),
+  output: 'server',
 });
