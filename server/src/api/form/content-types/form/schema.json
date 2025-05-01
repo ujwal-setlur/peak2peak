@@ -16,9 +16,6 @@
     "Email": {
       "type": "email"
     },
-    "Phone": {
-      "type": "string"
-    },
     "Message": {
       "type": "text"
     }

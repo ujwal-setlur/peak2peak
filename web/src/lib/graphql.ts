@@ -3,7 +3,6 @@ import { GraphQLClient, gql } from 'graphql-request';
 type ContactFormData = {
   Name: string;
   Email: string;
-  Phone: string;
   Message: string;
 };
 
