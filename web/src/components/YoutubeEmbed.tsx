@@ -14,7 +14,7 @@ export const YouTubeEmbed: React.FC<YouTubeEmbedProps> = ({ url, className }) =>
     <div className="w-full">
       <iframe
         src={`https://www.youtube.com/embed/${videoId}`}
-        title="About Us"
+        title="About Me"
         frameBorder="0"
         allowFullScreen
         className={className ? className : 'h-[320px] w-full md:h-[540px]'}
