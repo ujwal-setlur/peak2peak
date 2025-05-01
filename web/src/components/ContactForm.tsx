@@ -74,12 +74,12 @@ export const ContactForm: React.FC = () => {
         <input
           type="text"
           name="email"
-          placeholder="Your Email*"
+          placeholder="Your email*"
           className="w-full border-[1px] border-border border-opacity-75 px-3 py-2 text-[0.9rem] font-thin italic focus:border-opacity-0 focus:outline-none focus:ring-2 focus:ring-primary"
         />
         <textarea
           name="message"
-          placeholder="Write Message*"
+          placeholder="Write message*"
           className="min-h-[150px] w-full border-[1px] border-border border-opacity-75 px-3 py-2 text-[0.9rem] font-thin italic focus:border-opacity-0 focus:outline-none focus:ring-2 focus:ring-primary"
         ></textarea>
       </div>
