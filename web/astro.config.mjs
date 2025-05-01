@@ -3,18 +3,23 @@ import react from '@astrojs/react';
 import tailwind from '@astrojs/tailwind';
 import svgr from 'vite-plugin-svgr';
 
+import netlify from '@astrojs/netlify';
+
 export default defineConfig({
   site: 'https://peak2peak.life',
+
   vite: {
     plugins: [svgr()],
     server: {
       allowedHosts: [],
     },
   },
+
   integrations: [
     react({
       include: ['**/react/*'],
     }),
     tailwind(),
   ],
+  adapter: netlify(),
 });
