@@ -3,6 +3,8 @@ import react from '@astrojs/react';
 import tailwind from '@astrojs/tailwind';
 import svgr from 'vite-plugin-svgr';
 
+import netlify from '@astrojs/netlify';
+
 export default defineConfig({
   site: 'https://peak2peak.life',
   vite: {
@@ -17,4 +19,6 @@ export default defineConfig({
     }),
     tailwind(),
   ],
+  adapter: netlify(),
+  output: 'server',
 });
