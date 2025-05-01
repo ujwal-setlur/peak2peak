@@ -3,8 +3,8 @@ import Layout from '../layouts/Layout.astro';
 
 import Welcome from '../components/Welcome.astro';
 import { fetchHomeData } from '../lib/graphql';
-import { Image } from '../types/common';
-import { HeroSectionData } from '../types/home';
+import type { Image } from '../types/common';
+import type { HeroSectionData } from '../types/home';
 import { Posts } from '../components/Posts';
 
 type CategoryItem = {
