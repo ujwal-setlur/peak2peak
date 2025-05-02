@@ -14,11 +14,13 @@ type Media = {
 };
 
 let heroVideo: Media | null = null;
+let heroImage: Media | null = null;
 let heading: string | null = null;
 
 try {
   const data: any = await fetchContactPageData();
   heroVideo = data?.contact?.HeroVideo;
+  heroImage = data?.contact?.HeroImage;
   heading = data?.contact?.Heading;
 } catch (error) {
   console.error('Error fetching contact page data:', error);
@@ -33,18 +35,18 @@ try {
         {
           heroVideo?.url ? (
             <video
-              src={heroVideo.url}
+              src={heroImage?.url}
               autoplay
               loop={false}
               muted
               playsinline
-              class="h-[40vh] w-full object-cover md:h-[60vh]"
+              class="xs:h-[35vh] h-[30vh] w-full object-cover sm:h-[40vh] md:h-[50vh] lg:h-[55vh] xl:h-[60vh]"
             />
           ) : (
             <img
-              src='https://steadfast-advice-fa34b24fc0.media.strapiapp.com/stalactites_173a735741.jpeg'
+              src={heroImage?.url}
               alt="Peak2Peak"
-              class="h-[40vh] w-full object-cover md:h-[60vh]"
+              class="xs:h-[35vh] h-[30vh] w-full object-cover sm:h-[40vh] md:h-[50vh] lg:h-[55vh] xl:h-[60vh]"
             />
           )
         }
