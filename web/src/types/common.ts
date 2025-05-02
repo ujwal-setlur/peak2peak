@@ -15,6 +15,5 @@ export type SocialLink = {
 export type ContactFormData = {
   Name: string;
   Email: string;
-  Phone: string;
   Message: string;
 };

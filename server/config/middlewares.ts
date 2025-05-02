@@ -37,7 +37,7 @@ export default [
       jsonLimit: '256mb', // JSON data limit
       textLimit: '256mb', // Text data limit
       formidable: {
-        maxFileSize: 10 * 1024 * 1024, // 10MB in bytes, adjust as needed
+        maxFileSize: 200 * 1024 * 1024, // 200MB in bytes, adjust as needed
       },
     },
   },
