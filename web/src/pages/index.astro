@@ -43,7 +43,7 @@ try {
       >
       </div>
       <Welcome data={heroSection} />
-      <Posts client:load Categories={categories || []} />
+      <Posts client:visible Categories={categories || []} />
     </main>
   </div>
 </Layout>
