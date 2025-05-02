@@ -6,7 +6,9 @@ type ContactFormData = {
   Message: string;
 };
 
-const endpoint = (import.meta.env.PUBLIC_GRAPHQL_API_BASE_URL as string) || 'https://steadfast-advice-fa34b24fc0.strapiapp.com/graphql';
+const endpoint =
+  (import.meta.env.PUBLIC_GRAPHQL_API_BASE_URL as string) ||
+  'https://steadfast-advice-fa34b24fc0.strapiapp.com/graphql';
 
 const client = new GraphQLClient(endpoint, {
   headers: {

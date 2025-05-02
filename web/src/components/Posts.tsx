@@ -35,7 +35,9 @@ interface PostsProps {
 }
 
 export const Posts: React.FC<PostsProps> = ({ Categories }) => {
-  const [activeTab, setActiveTab] = useState<string | undefined>(Categories?.[0]?.Slug || '');
+  const [activeTab, setActiveTab] = useState<string | undefined>(
+    Categories?.find((category) => category.postCount && category.postCount > 0)?.Slug || ''
+  );
   const [isDetailsModalOpen, setIsDetailsModalOpen] = useState<boolean>(false);
   const [selectedPostId, setSelectedPostId] = useState<string>('');
   const [posts, setPosts] = useState<PostItem[]>([]);
