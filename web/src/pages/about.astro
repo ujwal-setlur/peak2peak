@@ -5,6 +5,9 @@ import { YouTubeEmbed } from '../components/YoutubeEmbed';
 
 import { fetchAboutPageData } from '../lib/graphql';
 
+// this is a static page, so prerender
+export const prerender = true;
+
 type Media = {
   url?: string;
 };

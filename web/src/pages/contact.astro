@@ -6,17 +6,18 @@ import contactImage from '../assets/bg.png';
 import { fetchContactPageData } from '../lib/graphql';
 import { ContactForm } from '../components/ContactForm';
 
+// this is a static page, so prerender
+export const prerender = true;
+
 type Media = {
   url?: string;
 };
 
-let heroImage: Media | null = null;
 let heroVideo: Media | null = null;
 let heading: string | null = null;
 
 try {
   const data: any = await fetchContactPageData();
-  heroImage = data?.contact?.HeroImage;
   heroVideo = data?.contact?.HeroVideo;
   heading = data?.contact?.Heading;
 } catch (error) {
