@@ -39,14 +39,14 @@ const NavLinksData = [
   <nav class="flex h-full w-full max-w-screen-2xl items-center justify-between">
     <!-- Logo section -->
     <a href="/" target="_self">
-      <img src={logoSrc} alt="PEAK2PEAK" class="h-[22px] select-none sm:h-[28px]" />
+      <img src={logoSrc} alt="PEAK2PEAK" class="h-[14px] select-none sm:h-[28px] md:h-[22px]" />
     </a>
 
     <div class="flex items-center gap-5">
       <!-- Hamburger for mobile -->
-      <button id="mobile-menu-button" class="block md:hidden text-white">
+      <button id="mobile-menu-button" class="block text-white md:hidden">
         <svg width="28" height="28" fill="none" viewBox="0 0 24 24">
-          <path stroke="currentColor" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+          <path stroke="currentColor" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
         </svg>
       </button>
 
@@ -92,7 +92,10 @@ const NavLinksData = [
   </nav>
 
   <!-- Mobile menu (hidden by default, shown when hamburger is clicked) -->
-  <div id="mobile-menu" class="md:hidden fixed top-[70px] left-0 w-full bg-black/90 text-white flex flex-col items-center gap-6 py-6 hidden">
+  <div
+    id="mobile-menu"
+    class="fixed left-0 top-[70px] flex hidden w-full flex-col items-center gap-6 bg-black/90 py-6 text-white md:hidden"
+  >
     {
       NavLinksData.map(({ title, href, icon }) => (
         <a href={href} class="flex items-center gap-2 text-lg font-thin">
@@ -101,7 +104,7 @@ const NavLinksData = [
         </a>
       ))
     }
-    <div class="flex gap-4 mt-4">
+    <div class="mt-4 flex gap-4">
       {
         socialData?.map(({ Name, Url, Icon }) => (
           <a href={Url || ''} target="_blank" rel="noopener noreferrer" class="h-8 w-8">

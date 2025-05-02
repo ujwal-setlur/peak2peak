@@ -26,16 +26,16 @@ const longDescription = data?.LongDescription;
 <section id="hero" class="flex w-full flex-col items-center justify-center px-5 pb-[80px]">
   <div class="flex w-full max-w-screen-2xl flex-col items-center justify-center">
     <!-- Logo section -->
-    <div class="z-10 flex h-[calc(100vh)] flex-col items-center justify-center">
-      <img src={logoSrc} alt="Peak2Peak" />
+    <div class="z-10 flex h-[60vh] flex-col items-center justify-center">
+      <img src={logoSrc} alt="Peak2Peak" class="h-auto max-w-[250px] md:max-w-[350px]" />
       <h6
-        class="mt-5 text-center font-playFair text-base font-bold italic tracking-wide text-white [word-spacing:1rem] sm:text-lg"
+        class="mt-2 text-center font-playFair text-base font-bold italic tracking-wide text-white [word-spacing:1rem] sm:text-lg"
       >
         {tagLine}
       </h6>
     </div>
 
-    <div class="z-10 flex w-full flex-col justify-center gap-10 lg:flex-row">
+    <div class="z-10 flex w-full flex-col justify-center gap-5 lg:flex-row lg:gap-10">
       <!-- Left section -->
       <div class="flex w-full flex-1">
         <div
@@ -47,7 +47,7 @@ const longDescription = data?.LongDescription;
             <img
               alt={profileName}
               src={profileImageSrc}
-              class="mt-5 rounded-full"
+              class="mt-5 h-[210px] w-[210] rounded-full object-cover"
               fetchpriority="high"
             />
           </div>
@@ -55,16 +55,16 @@ const longDescription = data?.LongDescription;
       </div>
 
       <!-- Middle section -->
-      <div class="flex flex-1 flex-col gap-5">
+      <div class="flex flex-1 flex-col">
         <div class="flex flex-col">
           <h1 class="text-[2.5rem] text-primary sm:text-[3rem]">{title}</h1>
+          <h6 class="w-full max-w-[250px] text-[1.5rem] font-thin text-secondary sm:text-[1.75rem]">
+            {subTitle}
+          </h6>
+          <span class="mt-2 w-full max-w-[400px] text-[1.15rem] font-medium text-white sm:text-base"
+            >{description}</span
+          >
         </div>
-        <h6 class="w-full max-w-[250px] text-[1.5rem] font-thin text-secondary sm:text-[1.75rem]">
-          {subTitle}
-        </h6>
-        <span class="w-full max-w-[400px] text-[1.15rem] font-medium text-white sm:text-base">
-          {description}
-        </span>
       </div>
 
       <!-- Right section -->
