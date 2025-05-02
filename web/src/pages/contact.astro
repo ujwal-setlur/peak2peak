@@ -6,17 +6,18 @@ import contactImage from '../assets/bg.png';
 import { fetchContactPageData } from '../lib/graphql';
 import { ContactForm } from '../components/ContactForm';
 
+// this is a static page, so prerender
+export const prerender = true;
+
 type Media = {
   url?: string;
 };
 
-let heroImage: Media | null = null;
 let heroVideo: Media | null = null;
 let heading: string | null = null;
 
 try {
   const data: any = await fetchContactPageData();
-  heroImage = data?.contact?.HeroImage;
   heroVideo = data?.contact?.HeroVideo;
   heading = data?.contact?.Heading;
 } catch (error) {
@@ -41,7 +42,7 @@ try {
             />
           ) : (
             <img
-              src={heroImage?.url}
+              src='https://steadfast-advice-fa34b24fc0.media.strapiapp.com/stalactites_173a735741.jpeg'
               alt="Peak2Peak"
               class="h-[40vh] w-full object-cover md:h-[60vh]"
             />

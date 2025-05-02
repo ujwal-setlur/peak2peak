@@ -7,7 +7,7 @@ module.exports = ({env}) => ({
                 api_key: env('CLOUDINARY_KEY'),
                 api_secret: env('CLOUDINARY_SECRET'),
             },
-            sizeLimit: 10 * 1024 * 1024,
+            sizeLimit: 200 * 1024 * 1024,
             actionOptions: {
                 upload: {},
                 uploadStream: {},
