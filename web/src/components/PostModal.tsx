@@ -7,6 +7,7 @@ import { getInitials } from '../utils';
 
 import LikeIcon from '../assets/like.svg?react';
 import CommentIcon from '../assets/comment.svg?react';
+import { YouTubeEmbed } from './YoutubeEmbed';
 
 type PostDetails = {
   Category?: {
@@ -40,6 +41,7 @@ type PostDetails = {
   commentCount?: number;
   AllowComments?: boolean;
   isLiked?: boolean;
+  YoutubeUrl?: string;
 };
 
 interface PostModalProps {
@@ -168,12 +170,19 @@ export const PostModal: React.FC<PostModalProps> = ({ isOpen, postId, onClose })
 
   const renderImageSection = () => {
     const videoUrl = postDetails?.Video?.[0]?.url;
+    const youtubeVideoUrl = postDetails?.YoutubeUrl;
     if (videoUrl) {
       return (
         <video controls className="h-auto w-full">
           <source src={videoUrl} type="video/mp4" />
           Your browser does not support the video tag.
         </video>
+      );
+    } else if (youtubeVideoUrl) {
+      return (
+        <div className="mt-10 flex w-full gap-10">
+          <YouTubeEmbed className="h-[320px] w-full md:h-[540px] md:pb-10" url={youtubeVideoUrl} />
+        </div>
       );
     } else {
       return (

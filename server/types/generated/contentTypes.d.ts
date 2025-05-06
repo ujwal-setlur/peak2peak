@@ -644,6 +644,7 @@ export interface ApiPostPost extends Struct.CollectionTypeSchema {
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
     Video: Schema.Attribute.Media<'videos', true>;
+    YoutubeUrl: Schema.Attribute.String;
   };
 }
 
