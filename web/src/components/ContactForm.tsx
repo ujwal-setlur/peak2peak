@@ -46,9 +46,9 @@ export const ContactForm: React.FC = () => {
         SERVICE_ID,
         TEMPLATE_ID,
         {
-          from_name: name,
-          from_email: email,
-          message: message,
+          name,
+          email,
+          message,
         },
         PUBLIC_KEY
       );
