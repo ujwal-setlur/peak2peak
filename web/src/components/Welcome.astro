@@ -35,7 +35,7 @@ const longDescription = data?.LongDescription;
       </h6>
     </div>
 
-    <div class="z-10 flex w-full flex-col justify-center gap-5 lg:flex-row lg:gap-10">
+    <div class="z-10 flex w-full flex-col items-stretch justify-center gap-5 lg:flex-row lg:gap-10">
       <!-- Left section -->
       <div class="flex w-full flex-1">
         <div
@@ -55,7 +55,7 @@ const longDescription = data?.LongDescription;
       </div>
 
       <!-- Middle section -->
-      <div class="flex flex-1 flex-col">
+      <div class="flex flex-1 flex-col justify-center">
         <div class="flex flex-col">
           <h1 class="text-[2.5rem] text-primary sm:text-[3rem]">{title}</h1>
           <h6 class="w-full max-w-[250px] text-[1.5rem] font-thin text-secondary sm:text-[1.75rem]">
@@ -68,7 +68,7 @@ const longDescription = data?.LongDescription;
       </div>
 
       <!-- Right section -->
-      <div class="flex w-full max-w-[400px] flex-1 flex-col gap-5">
+      <div class="flex w-full max-w-[400px] flex-1 flex-col justify-center gap-5">
         <div
           class="text-[1.1rem] text-white sm:text-base"
           set:html={longDescription ? strapiRichTextToHtml(longDescription) : ''}
