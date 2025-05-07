@@ -145,6 +145,7 @@ export const fetchPostDetails = async (documentId: string, visitorId: string, so
         likeCounts
         createdAt
         isLiked(visitorId: $visitorId)
+        YoutubeUrl
       }
     }
   `;

@@ -61,6 +61,10 @@
       "relation": "oneToMany",
       "target": "api::comment.comment",
       "mappedBy": "Post"
+    },
+    "YoutubeUrl": {
+      "type": "string",
+      "regex": "^(https?:\\/\\/)?(www\\.)?(youtube\\.com\\/watch\\?v=|youtu\\.be\\/)[\\w-]{11}$"
     }
   }
 }
