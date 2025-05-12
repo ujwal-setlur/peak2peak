@@ -2,12 +2,13 @@ import React, { useState, useEffect, useRef } from 'react';
 import toast, { Toaster } from 'react-hot-toast';
 
 import { addComment, fetchPostDetails, toggleLike } from '../lib/graphql';
-import { formatDate, isValidEmail, strapiRichTextToHtml } from '../lib/utils';
+import { formatDate, isValidEmail } from '../lib/utils';
 import { getInitials } from '../utils';
 
 import LikeIcon from '../assets/like.svg?react';
 import CommentIcon from '../assets/comment.svg?react';
 import { YouTubeEmbed } from './YoutubeEmbed';
+import RichTextRenderer from './RichTextRenderer';
 
 type PostDetails = {
   Category?: {
@@ -251,12 +252,9 @@ export const PostModal: React.FC<PostModalProps> = ({ isOpen, postId, onClose })
 
   const renderDescription = () => {
     return (
-      <div
-        className="w-full text-sm font-thin text-black"
-        dangerouslySetInnerHTML={{
-          __html: postDetails?.Description ? strapiRichTextToHtml(postDetails?.Description) : '',
-        }}
-      />
+      <div className="w-full text-sm font-thin text-black">
+        {postDetails?.Description ? <RichTextRenderer content={postDetails?.Description} /> : null}
+      </div>
     );
   };
 

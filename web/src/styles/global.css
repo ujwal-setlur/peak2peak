@@ -35,6 +35,14 @@
   p {
     @apply mb-1 text-base font-thin;
   }
+
+  img {
+    @apply pointer-events-none select-none;
+  }
+
+  video {
+    @apply select-none;
+  }
 }
 
 body.modal-open {

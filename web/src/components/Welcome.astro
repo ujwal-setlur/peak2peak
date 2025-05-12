@@ -1,7 +1,7 @@
 ---
 import { HeroSectionData } from '../types/home';
 
-import { strapiRichTextToHtml } from '../lib/utils';
+import RichTextRenderer from './RichTextRenderer';
 
 export interface Props {
   data: HeroSectionData | null;
@@ -69,10 +69,9 @@ const longDescription = data?.LongDescription;
 
       <!-- Right section -->
       <div class="flex w-full max-w-[400px] flex-1 flex-col justify-center gap-5">
-        <div
-          class="text-[1.1rem] text-white sm:text-base"
-          set:html={longDescription ? strapiRichTextToHtml(longDescription) : ''}
-        />
+        <div class="text-[1.1rem] text-white sm:text-base">
+          {longDescription ? <RichTextRenderer content={longDescription} /> : null}
+        </div>
       </div>
     </div>
   </div>
