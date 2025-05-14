@@ -155,7 +155,7 @@ export const PostModal: React.FC<PostModalProps> = ({ isOpen, postId, onClose })
   const renderCloseButton = () => {
     return (
       <button
-        className="group absolute left-0 top-0 flex h-16 w-16 items-center justify-center overflow-hidden bg-primary text-gray-400 hover:text-gray-900 dark:hover:text-white"
+        className="group bg-primary absolute top-0 left-0 flex h-16 w-16 items-center justify-center overflow-hidden text-gray-400 hover:text-gray-900 dark:hover:text-white"
         data-modal-close
         data-post-id={postId}
         onClick={onClose}
@@ -201,7 +201,7 @@ export const PostModal: React.FC<PostModalProps> = ({ isOpen, postId, onClose })
 
   const renderTitle = () => {
     return (
-      <div className="w-full text-md font-semibold leading-tight text-primary sm:text-lg">
+      <div className="text-md text-primary w-full leading-tight font-semibold sm:text-lg">
         {postDetails?.Title || ''}
       </div>
     );
@@ -244,7 +244,7 @@ export const PostModal: React.FC<PostModalProps> = ({ isOpen, postId, onClose })
             data-action="like"
             data-post-id={postId}
           >
-            <CommentIcon className="h-8 w-8 fill-primary" />
+            <CommentIcon className="fill-primary h-8 w-8" />
           </button>
           <span className="text-md font-medium text-black" id={`comments-count-${postId}`}>
             {postDetails?.commentCount || 0}
@@ -271,11 +271,8 @@ export const PostModal: React.FC<PostModalProps> = ({ isOpen, postId, onClose })
                 const isLastComment =
                   postDetails?.Comments?.length && index === postDetails.Comments.length - 1;
                 return (
-                  <li
-                    key={index}
-                    className={`flex gap-3 ${!isLastComment ? 'border-b-[1px] pb-3' : ''}`}
-                  >
-                    <div className="flex h-[50px] w-[50px] shrink-0 items-center justify-center rounded-full bg-primary text-sm font-medium text-white">
+                  <li key={index} className={`flex gap-3 ${!isLastComment ? 'border-b pb-3' : ''}`}>
+                    <div className="bg-primary flex h-[50px] w-[50px] shrink-0 items-center justify-center rounded-full text-sm font-medium text-white">
                       {comment.User ? getInitials(comment.User) : ''}
                     </div>
                     <div className="flex flex-col">
@@ -312,25 +309,25 @@ export const PostModal: React.FC<PostModalProps> = ({ isOpen, postId, onClose })
             <textarea
               name="comment"
               placeholder="Write your comments..."
-              className="w-full border px-3 py-2 text-xs italic focus:outline-none focus:ring-2 focus:ring-primary"
+              className="focus:ring-primary w-full border px-3 py-2 text-xs italic focus:ring-2 focus:outline-hidden"
             ></textarea>
             <input
               type="text"
               name="name"
               placeholder="Your name"
-              className="w-full border px-3 py-2 text-xs italic focus:outline-none focus:ring-2 focus:ring-primary"
+              className="focus:ring-primary w-full border px-3 py-2 text-xs italic focus:ring-2 focus:outline-hidden"
             />
             <input
               type="text"
               name="email"
               placeholder="Email"
-              className="w-full border px-3 py-2 text-xs italic focus:outline-none focus:ring-2 focus:ring-primary"
+              className="focus:ring-primary w-full border px-3 py-2 text-xs italic focus:ring-2 focus:outline-hidden"
             />
           </div>
           <button
             type="submit"
             disabled={isAddCommentLoading}
-            className="w-[150px] self-start bg-gradient-to-r from-teal-500 to-teal-800 px-1 py-2 text-xs tracking-wider text-white hover:from-teal-800 hover:to-teal-500 hover:font-medium"
+            className="w-[150px] self-start bg-linear-to-r from-teal-500 to-teal-800 px-1 py-2 text-xs tracking-wider text-white hover:from-teal-800 hover:to-teal-500 hover:font-medium"
           >
             {isAddCommentLoading ? 'Submitting...' : ' SUBMIT'}
           </button>
@@ -347,12 +344,12 @@ export const PostModal: React.FC<PostModalProps> = ({ isOpen, postId, onClose })
   return (
     <div>
       <div
-        className="fixed inset-0 z-40 flex items-center justify-center px-3 pb-[50px] pt-[100px] opacity-100 transition-opacity duration-300 md:px-5"
+        className="fixed inset-0 z-40 flex items-center justify-center px-3 pt-[100px] pb-[50px] opacity-100 transition-opacity duration-300 md:px-5"
         id={`modal-${postId}`}
       >
         <div className="absolute inset-0 bg-black opacity-50" data-post-id={postId}></div>
 
-        <div className="overscroll-y-hidden relative z-10 h-full max-h-[85vh] w-full max-w-screen-2xl overflow-x-hidden border-[1px] border-primary bg-white p-4 shadow-lg sm:max-h-[80vh] md:p-5 md:pr-0">
+        <div className="overscroll-y-hidden border-primary relative z-10 h-full max-h-[85vh] w-full max-w-(--breakpoint-2xl) overflow-x-hidden border bg-white p-4 shadow-lg sm:max-h-[80vh] md:p-5 md:pr-0">
           <div className="flex h-full w-full flex-col gap-5 sm:flex-row sm:gap-2">
             <div className="max-w-auto relative flex aspect-square w-full sm:max-w-[60%]">
               {renderImageSection()}
@@ -360,7 +357,7 @@ export const PostModal: React.FC<PostModalProps> = ({ isOpen, postId, onClose })
             </div>
 
             <div className="max-w-auto w-full space-y-4 sm:max-w-[40%]">
-              <div className="flex w-full flex-col gap-3 bg-white bg-opacity-5 px-0 pb-5 sm:px-5">
+              <div className="bg-opacity-5 flex w-full flex-col gap-3 bg-white px-0 pb-5 sm:px-5">
                 {renderTitle()}
                 {renderDateAndCategorySection()}
                 {renderLikeAndCommentSection()}

@@ -37,7 +37,7 @@ const NavLinksData = [
 <header
   class="fixed top-0 z-50 flex h-full max-h-[70px] w-full justify-center bg-black/50 px-5 backdrop-blur-md sm:max-h-[80px]"
 >
-  <nav class="flex h-full w-full max-w-screen-2xl items-center justify-between">
+  <nav class="flex h-full w-full max-w-(--breakpoint-2xl) items-center justify-between">
     <!-- Logo section -->
     <a href="/" target="_self">
       <SecureImage
@@ -62,7 +62,7 @@ const NavLinksData = [
             return (
               <a
                 href={href}
-                class="flex select-none items-center gap-2 text-base font-thin text-white"
+                class="flex items-center gap-2 text-base font-thin text-white select-none"
               >
                 <SecureImage src={icon.src} className="h-5 w-5" alt="" />
                 <span class="font-thin text-white">{title}</span>
@@ -72,7 +72,7 @@ const NavLinksData = [
         }
       </div>
 
-      <span class="hidden select-none text-lg font-thin text-white text-opacity-50 lg:block">
+      <span class="text-opacity-50 hidden text-lg font-thin text-white select-none lg:block">
         &#124;
       </span>
 
@@ -99,7 +99,7 @@ const NavLinksData = [
   <!-- Mobile menu (hidden by default, shown when hamburger is clicked) -->
   <div
     id="mobile-menu"
-    class="fixed left-0 top-[70px] flex hidden w-full flex-col items-center gap-6 bg-black/90 py-6 text-white md:hidden"
+    class="fixed top-[70px] left-0 flex hidden w-full flex-col items-center gap-6 bg-black/90 py-6 text-white md:hidden"
   >
     {
       NavLinksData.map(({ title, href, icon }) => (

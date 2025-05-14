@@ -47,13 +47,13 @@ const PostCard: React.FC<PostCardProps> = ({ data, onClick }) => {
       <div className="absolute inset-0 flex items-center justify-center gap-[30px] opacity-0 duration-300 group-hover:cursor-pointer group-hover:opacity-100 group-hover:transition-opacity sm:gap-[45px] lg:gap-[60px]">
         <div className="flex flex-col items-center justify-center gap-2">
           <LikeIcon className="h-6 sm:h-7 lg:h-10" />
-          <span className="text-sm font-medium text-white sm:text-base lg:text-md">
+          <span className="lg:text-md text-sm font-medium text-white sm:text-base">
             {data?.likeCounts || 0}
           </span>
         </div>
         <div className="flex flex-col items-center justify-center gap-2">
           <CommentIcon className="h-6 sm:h-7 lg:h-10" />
-          <span className="text-sm font-medium text-white sm:text-base lg:text-md">
+          <span className="lg:text-md text-sm font-medium text-white sm:text-base">
             {data?.commentCount || 0}
           </span>
         </div>
