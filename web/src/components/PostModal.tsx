@@ -45,6 +45,7 @@ type PostDetails = {
   AllowComments?: boolean;
   isLiked?: boolean;
   YoutubeUrl?: string;
+  PostedAt?: string;
 };
 
 interface PostModalProps {
@@ -207,9 +208,10 @@ export const PostModal: React.FC<PostModalProps> = ({ isOpen, postId, onClose })
   };
 
   const renderDateAndCategorySection = () => {
+    const postedDate = postDetails?.PostedAt || postDetails?.createdAt;
     return (
       <div className="w-full text-base font-thin text-black">
-        {postDetails?.createdAt ? formatDate(postDetails?.createdAt) : ''}
+        {postedDate ? formatDate(postedDate) : ''}
         <span className="mx-2 font-thin">|</span>
         {postDetails?.Category?.Name || ''}
       </div>
