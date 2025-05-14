@@ -1,4 +1,5 @@
 import React from 'react';
+import SecureImage from './SecureImage';
 
 type TabBarItemProps = {
   tab: {
@@ -35,7 +36,7 @@ const TabBarItem: React.FC<TabBarItemProps> = ({ tab, isActive = false, onClick 
           />
         </div>
         <div className="flex items-center gap-2">
-          <img src={tab?.Icon?.url} className="h-[25px]" />
+          <SecureImage src={tab?.Icon?.url || ''} className="h-[25px]" alt="" />
           <span
             className={`uppercase text-black duration-300 ${
               isActive ? 'font-medium' : 'font-thin group-hover:font-medium'

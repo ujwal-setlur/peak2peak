@@ -2,6 +2,7 @@ import React from 'react';
 
 import LikeIcon from '../assets/like.svg?react';
 import CommentIcon from '../assets/comment.svg?react';
+import SecureImage from './SecureImage';
 
 type PostCardProps = {
   data: {
@@ -30,8 +31,8 @@ const PostCard: React.FC<PostCardProps> = ({ data, onClick }) => {
       className="post-card group relative aspect-square w-full overflow-hidden"
       onClick={() => onClick && onClick(data?.documentId || '')}
     >
-      <img
-        src={data?.ThumbNail?.url || data?.Images?.[0]?.url || undefined}
+      <SecureImage
+        src={data?.ThumbNail?.url || data?.Images?.[0]?.url || ''}
         alt={data?.Title || ''}
         className="cover aspect-square w-full overflow-hidden duration-300 ease-in group-hover:scale-110 group-hover:transform"
       />

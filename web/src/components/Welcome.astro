@@ -2,6 +2,7 @@
 import { HeroSectionData } from '../types/home';
 
 import RichTextRenderer from './RichTextRenderer';
+import SecureImage from './SecureImage';
 
 export interface Props {
   data: HeroSectionData | null;
@@ -27,7 +28,11 @@ const longDescription = data?.LongDescription;
   <div class="flex w-full max-w-screen-2xl flex-col items-center justify-center">
     <!-- Logo section -->
     <div class="z-10 flex h-[60vh] flex-col items-center justify-center">
-      <img src={logoSrc} alt="Peak2Peak" class="h-auto max-w-[250px] md:max-w-[350px]" />
+      <SecureImage
+        src={logoSrc}
+        alt="Peak2Peak"
+        className="h-auto max-w-[250px] md:max-w-[350px]"
+      />
       <h6
         class="mt-2 text-center font-playFair text-base font-bold italic tracking-wide text-white [word-spacing:1rem] sm:text-lg"
       >
@@ -44,11 +49,11 @@ const longDescription = data?.LongDescription;
           <h4 class="text-[2rem] uppercase sm:text-[2.5rem]">{profileName}</h4>
           <h6 class="text-[1.5rem] font-thin text-black sm:text-[1.75rem]">{profileTitle}</h6>
           <div class="px-3">
-            <img
+            <SecureImage
               alt={profileName}
               src={profileImageSrc}
-              class="mt-5 h-[210px] w-[210] rounded-full object-cover"
-              fetchpriority="high"
+              className="mt-5 h-[210px] w-[210] rounded-full object-cover"
+              fetchPriority="high"
             />
           </div>
         </div>

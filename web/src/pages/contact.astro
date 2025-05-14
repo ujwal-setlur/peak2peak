@@ -5,7 +5,8 @@ import contactImage from '../assets/bg.png';
 
 import { fetchContactPageData } from '../lib/graphql';
 import { ContactForm } from '../components/ContactForm';
-
+import SecureImage from '../components/SecureImage';
+import SecureVideo from '../components/SecureVideo';
 
 type Media = {
   url?: string;
@@ -32,19 +33,19 @@ try {
       <div class="relative flex w-full justify-center bg-cover bg-center bg-no-repeat">
         {
           heroVideo?.url ? (
-            <video
+            <SecureVideo
               src={heroImage?.url}
-              autoplay
+              autoPlay
               loop={false}
               muted
-              playsinline
-              class="xs:h-[35vh] h-[30vh] w-full object-cover sm:h-[40vh] md:h-[50vh] lg:h-[55vh] xl:h-[60vh]"
+              playsInline
+              className="xs:h-[35vh] h-[30vh] w-full object-cover sm:h-[40vh] md:h-[50vh] lg:h-[55vh] xl:h-[60vh]"
             />
           ) : (
-            <img
-              src={heroImage?.url}
+            <SecureImage
+              src={heroImage?.url || ''}
               alt="Peak2Peak"
-              class="xs:h-[35vh] h-[30vh] w-full object-cover sm:h-[40vh] md:h-[50vh] lg:h-[55vh] xl:h-[60vh]"
+              className="xs:h-[35vh] h-[30vh] w-full object-cover sm:h-[40vh] md:h-[50vh] lg:h-[55vh] xl:h-[60vh]"
             />
           )
         }
@@ -76,7 +77,7 @@ try {
           <!-- Contact Info Section -->
           <div class="max-w-auto mt-3 flex w-full flex-col md:max-w-[50%] lg:max-w-[30%]">
             <div class="flex aspect-square w-full">
-              <img src={contactImage.src} alt="image" class="" />
+              <SecureImage src={contactImage.src} alt="image" />
             </div>
           </div>
         </div>

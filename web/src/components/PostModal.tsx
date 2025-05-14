@@ -9,6 +9,8 @@ import LikeIcon from '../assets/like.svg?react';
 import CommentIcon from '../assets/comment.svg?react';
 import { YouTubeEmbed } from './YoutubeEmbed';
 import RichTextRenderer from './RichTextRenderer';
+import SecureImage from './SecureImage';
+import SecureVideo from './SecureVideo';
 
 type PostDetails = {
   Category?: {
@@ -174,10 +176,10 @@ export const PostModal: React.FC<PostModalProps> = ({ isOpen, postId, onClose })
     const youtubeVideoUrl = postDetails?.YoutubeUrl;
     if (videoUrl) {
       return (
-        <video controls className="h-auto w-full">
+        <SecureVideo controls className="h-auto w-full">
           <source src={videoUrl} type="video/mp4" />
           Your browser does not support the video tag.
-        </video>
+        </SecureVideo>
       );
     } else if (youtubeVideoUrl) {
       return (
@@ -187,8 +189,8 @@ export const PostModal: React.FC<PostModalProps> = ({ isOpen, postId, onClose })
       );
     } else {
       return (
-        <img
-          src={postDetails?.Images?.[0]?.url}
+        <SecureImage
+          src={postDetails?.Images?.[0]?.url || ''}
           alt="post"
           className="aspect-square w-full overflow-hidden object-cover"
         />
