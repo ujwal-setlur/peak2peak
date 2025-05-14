@@ -23,23 +23,15 @@ const description = data?.ShortDescription || '';
 const longDescription = data?.LongDescription;
 ---
 
-<section id="hero" class="flex w-full flex-col items-center justify-center px-5 pb-[80px]">
+<section id="hero" class="flex w-full flex-col items-center justify-center px-5 pb-[0px]">
   <div class="flex w-full max-w-screen-2xl flex-col items-center justify-center">
-    <!-- Logo section -->
-    <div class="z-10 flex h-[60vh] flex-col items-center justify-center">
-      <img src={logoSrc} alt="Peak2Peak" class="h-auto max-w-[250px] md:max-w-[350px]" />
-      <h6
-        class="mt-2 text-center font-playFair text-base font-bold italic tracking-wide text-white [word-spacing:1rem] sm:text-lg"
-      >
-        {tagLine}
-      </h6>
-    </div>
-
-    <div class="z-10 flex w-full flex-col items-stretch justify-center gap-5 lg:flex-row lg:gap-10">
+    <div
+      class="z-10 flex w-full flex-col items-center items-stretch justify-center gap-5 lg:flex-row lg:gap-10"
+    >
       <!-- Left section -->
-      <div class="flex w-full flex-1">
+      <div class="flex w-full flex-1 items-center">
         <div
-          class="flex w-full max-w-[475px] flex-1 flex-col items-center justify-center gap-3 bg-white/70 px-3 py-10 backdrop-blur-md"
+          class="flex w-full max-w-[400px] flex-1 flex-col items-center justify-center gap-3 bg-white/70 px-3 py-10 backdrop-blur-md"
         >
           <h4 class="text-[2rem] uppercase sm:text-[2.5rem]">{profileName}</h4>
           <h6 class="text-[1.5rem] font-thin text-black sm:text-[1.75rem]">{profileTitle}</h6>
@@ -55,21 +47,30 @@ const longDescription = data?.LongDescription;
       </div>
 
       <!-- Middle section -->
-      <div class="flex flex-1 flex-col justify-center">
+      <div class="flex w-full flex-1 flex-col items-center justify-center">
+        <div class="z-10 flex h-[60vh] flex-col items-center justify-center">
+          <img src={logoSrc} alt="Peak2Peak" class="h-auto max-w-[250px] md:max-w-[350px]" />
+          <h6
+            class="mt-2 text-center font-playFair text-base font-bold italic tracking-wide text-white [word-spacing:1rem] sm:text-lg"
+          >
+            {tagLine}
+          </h6>
+        </div>
+      </div>
+
+      <!-- Right section -->
+      <div class="flex w-full flex-1 flex-col items-start justify-center gap-5">
         <div class="flex flex-col">
           <h1 class="text-[2.5rem] text-primary sm:text-[3rem]">{title}</h1>
           <h6 class="w-full max-w-[250px] text-[1.5rem] font-thin text-secondary sm:text-[1.75rem]">
             {subTitle}
           </h6>
-          <span class="mt-2 w-full max-w-[400px] text-[1.15rem] font-medium text-white sm:text-base"
+          <span
+            class="ml-12 mt-2 w-full max-w-[400px] text-[1.15rem] font-medium text-white sm:text-base"
             >{description}</span
           >
         </div>
-      </div>
-
-      <!-- Right section -->
-      <div class="flex w-full max-w-[400px] flex-1 flex-col justify-center gap-5">
-        <div class="text-[1.1rem] text-white sm:text-base">
+        <div class="ml-12 text-[1.1rem] text-white sm:text-base">
           {longDescription ? <RichTextRenderer content={longDescription} /> : null}
         </div>
       </div>
