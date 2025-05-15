@@ -2,6 +2,7 @@ import React from 'react';
 
 import LikeIcon from '../assets/like.svg?react';
 import CommentIcon from '../assets/comment.svg?react';
+import SecureImage from './SecureImage';
 
 type PostCardProps = {
   data: {
@@ -30,11 +31,12 @@ const PostCard: React.FC<PostCardProps> = ({ data, onClick }) => {
       className="post-card group relative aspect-square w-full overflow-hidden"
       onClick={() => onClick && onClick(data?.documentId || '')}
     >
-      <img
-        src={data?.ThumbNail?.url || data?.Images?.[0]?.url || undefined}
+      <SecureImage
+        src={data?.ThumbNail?.url || data?.Images?.[0]?.url || ''}
         alt={data?.Title || ''}
         className="cover aspect-square w-full overflow-hidden duration-300 ease-in group-hover:scale-110 group-hover:transform"
       />
+      <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
       <div className="absolute inset-0 flex items-end justify-start gap-[60px] px-4 py-3">
         {data?.Title && (
           <span className="line-clamp-2 text-sm font-medium text-white sm:text-base lg:text-[1.65rem]">
@@ -46,13 +48,13 @@ const PostCard: React.FC<PostCardProps> = ({ data, onClick }) => {
       <div className="absolute inset-0 flex items-center justify-center gap-[30px] opacity-0 duration-300 group-hover:cursor-pointer group-hover:opacity-100 group-hover:transition-opacity sm:gap-[45px] lg:gap-[60px]">
         <div className="flex flex-col items-center justify-center gap-2">
           <LikeIcon className="h-6 sm:h-7 lg:h-10" />
-          <span className="text-sm font-medium text-white sm:text-base lg:text-md">
+          <span className="lg:text-md text-sm font-medium text-white sm:text-base">
             {data?.likeCounts || 0}
           </span>
         </div>
         <div className="flex flex-col items-center justify-center gap-2">
           <CommentIcon className="h-6 sm:h-7 lg:h-10" />
-          <span className="text-sm font-medium text-white sm:text-base lg:text-md">
+          <span className="lg:text-md text-sm font-medium text-white sm:text-base">
             {data?.commentCount || 0}
           </span>
         </div>

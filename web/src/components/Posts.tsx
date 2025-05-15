@@ -133,8 +133,8 @@ export const Posts: React.FC<PostsProps> = ({ Categories }) => {
 
   return (
     <section className="flex w-full flex-col overflow-auto">
-      <div className="z-10 flex w-full flex-col items-center justify-center bg-white/70 px-5 backdrop-blur-sm">
-        <div className="flex w-full max-w-screen-2xl flex-col gap-5">
+      <div className="z-10 flex w-full flex-col items-center justify-center bg-white/70 px-5 backdrop-blur-xs">
+        <div className="flex w-full max-w-(--breakpoint-2xl) flex-col gap-5">
           {/* Tab Bar */}
           <div className="relative w-full">
             <div className="flex items-center overflow-x-auto">
