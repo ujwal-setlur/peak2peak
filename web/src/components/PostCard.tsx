@@ -36,6 +36,7 @@ const PostCard: React.FC<PostCardProps> = ({ data, onClick }) => {
         alt={data?.Title || ''}
         className="cover aspect-square w-full overflow-hidden duration-300 ease-in group-hover:scale-110 group-hover:transform"
       />
+      <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
       <div className="absolute inset-0 flex items-end justify-start gap-[60px] px-4 py-3">
         {data?.Title && (
           <span className="line-clamp-2 text-sm font-medium text-white sm:text-base lg:text-[1.65rem]">
