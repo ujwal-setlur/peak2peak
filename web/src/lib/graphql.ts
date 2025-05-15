@@ -146,6 +146,7 @@ export const fetchPostDetails = async (documentId: string, visitorId: string, so
         createdAt
         isLiked(visitorId: $visitorId)
         YoutubeUrl
+        PostedAt
       }
     }
   `;

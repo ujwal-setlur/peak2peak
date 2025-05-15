@@ -69,24 +69,24 @@ export const ContactForm: React.FC = () => {
           type="text"
           name="name"
           placeholder="Your name*"
-          className="w-full border-[1px] border-border border-opacity-75 px-3 py-2 text-[0.9rem] font-thin italic focus:border-opacity-0 focus:outline-none focus:ring-2 focus:ring-primary"
+          className="border-border border-opacity-75 focus:border-opacity-0 focus:ring-primary w-full border px-3 py-2 text-[0.9rem] font-thin italic focus:ring-2 focus:outline-hidden"
         />
         <input
           type="text"
           name="email"
           placeholder="Your email*"
-          className="w-full border-[1px] border-border border-opacity-75 px-3 py-2 text-[0.9rem] font-thin italic focus:border-opacity-0 focus:outline-none focus:ring-2 focus:ring-primary"
+          className="border-border border-opacity-75 focus:border-opacity-0 focus:ring-primary w-full border px-3 py-2 text-[0.9rem] font-thin italic focus:ring-2 focus:outline-hidden"
         />
         <textarea
           name="message"
           placeholder="Write message*"
-          className="min-h-[150px] w-full border-[1px] border-border border-opacity-75 px-3 py-2 text-[0.9rem] font-thin italic focus:border-opacity-0 focus:outline-none focus:ring-2 focus:ring-primary"
+          className="border-border border-opacity-75 focus:border-opacity-0 focus:ring-primary min-h-[150px] w-full border px-3 py-2 text-[0.9rem] font-thin italic focus:ring-2 focus:outline-hidden"
         ></textarea>
       </div>
       <button
         type="submit"
         disabled={loading}
-        className="mt-2 w-[225px] self-start bg-gradient-to-r from-teal-500 to-teal-800 px-1 py-2 text-xs tracking-wider text-white hover:from-teal-800 hover:to-teal-500 hover:font-medium"
+        className="mt-2 w-[225px] self-start bg-linear-to-r from-teal-500 to-teal-800 px-1 py-2 text-xs tracking-wider text-white hover:from-teal-800 hover:to-teal-500 hover:font-medium"
       >
         {loading ? 'Sending...' : 'SEND MESSAGE'}
       </button>

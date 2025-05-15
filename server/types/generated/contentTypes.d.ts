@@ -641,6 +641,7 @@ export interface ApiPostPost extends Struct.CollectionTypeSchema {
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<'oneToMany', 'api::post.post'> &
       Schema.Attribute.Private;
+    PostedAt: Schema.Attribute.Date;
     publishedAt: Schema.Attribute.DateTime;
     ThumbNail: Schema.Attribute.Media<'images'>;
     Title: Schema.Attribute.String;
