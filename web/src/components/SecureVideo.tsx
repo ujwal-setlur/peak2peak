@@ -7,7 +7,6 @@ const SecureVideo: React.FC<React.VideoHTMLAttributes<HTMLVideoElement>> = ({
   return (
     <video
       {...props}
-      controls
       controlsList="nodownload"
       disablePictureInPicture
       onContextMenu={(e) => e.preventDefault()}
