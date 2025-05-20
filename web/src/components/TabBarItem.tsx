@@ -1,4 +1,5 @@
 import React from 'react';
+import SecureImage from './SecureImage';
 
 type TabBarItemProps = {
   tab: {
@@ -19,7 +20,7 @@ const TabBarItem: React.FC<TabBarItemProps> = ({ tab, isActive = false, onClick 
   };
 
   return (
-    <div className="flex min-w-[250px] shrink-0 select-none self-start">
+    <div className="flex min-w-[250px] shrink-0 self-start select-none">
       <a
         key={tab?.Slug}
         onClick={handleClick}
@@ -27,7 +28,7 @@ const TabBarItem: React.FC<TabBarItemProps> = ({ tab, isActive = false, onClick 
       >
         <div className="flex w-full items-start">
           <div
-            className={`h-[16px] transition-width duration-300 ease-in-out ${
+            className={`transition-width h-[16px] duration-300 ease-in-out ${
               isActive
                 ? 'w-full bg-teal-600'
                 : 'w-[6px] bg-[#bbbbbb] group-hover:w-full group-hover:bg-teal-600'
@@ -35,9 +36,9 @@ const TabBarItem: React.FC<TabBarItemProps> = ({ tab, isActive = false, onClick 
           />
         </div>
         <div className="flex items-center gap-2">
-          <img src={tab?.Icon?.url} className="h-[25px]" />
+          <SecureImage src={tab?.Icon?.url || ''} className="h-[25px]" alt="" />
           <span
-            className={`uppercase text-black duration-300 ${
+            className={`text-black uppercase duration-300 ${
               isActive ? 'font-medium' : 'font-thin group-hover:font-medium'
             }`}
           >
